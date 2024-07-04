@@ -21,7 +21,7 @@
   </main>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { Icon } from "@iconify/vue";
 import { ref } from "vue";
 import { isNavOpened } from "../store/NavStore";

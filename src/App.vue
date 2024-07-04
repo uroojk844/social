@@ -1,15 +1,12 @@
 <script lang="ts" setup>
 import SideBar from "./components/SideBar.vue";
 import AsideView from "./components/AsideView.vue";
-import MobileNav from "./components/MobileNav.vue";
 import { RouterView } from "vue-router";
-
 </script>
 <template>
   <section class="grid h-full grid-cols-[max-content_auto_max-content]">
     <SideBar />
     <main class="grid gap-4 content-start p-4 md:p-8">
-      <MobileNav />
       <RouterView />
     </main>
     <AsideView />

@@ -3,7 +3,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 export const routes = <RouteRecordRaw[]>[
   {
     path: "/",
-    name: "News Feed",
+    name: "feed",
     component: () => import("./pages/Feed.vue"),
   },
   {

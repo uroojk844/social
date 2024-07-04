@@ -1,5 +1,5 @@
 <template>
-  <nav class="hidden flex justify-between items-center">
+  <nav class="flex justify-between items-center">
     <button @click="isNavOpened = !isNavOpened">
       <Icon icon="gravity-ui:bars-unaligned" class="text-xl" />
     </button>
