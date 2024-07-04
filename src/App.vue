@@ -1,20 +1,31 @@
 <script lang="ts" setup>
 import SideBar from "./components/SideBar.vue";
-import MainView from "./components/MainView.vue";
 import AsideView from "./components/AsideView.vue";
+import MobileNav from "./components/MobileNav.vue";
+import { RouterView } from "vue-router";
+
 </script>
 <template>
-  <section class="grid h-full grid-cols-5">
+  <section class="grid h-full grid-cols-[max-content_auto_max-content]">
     <SideBar />
-    <MainView />
+    <main class="grid gap-4 content-start p-4 md:p-8">
+      <MobileNav />
+      <RouterView />
+    </main>
     <AsideView />
   </section>
 </template>
 
 <style scoped>
-@media screen and (width<768px) {
+@media screen and (600px < width <= 768px) {
   section {
-    @apply grid-cols-2;
+    @apply grid-cols-[auto_max-content];
+  }
+}
+
+@media screen and (width <= 600px) {
+  section {
+    @apply grid-cols-[1fr];
   }
 }
 </style>

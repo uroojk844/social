@@ -1,5 +1,8 @@
 <template>
-  <nav class="p-8 flex flex-col gap-8 transition-all duration-200">
+  <nav
+    :class="{ opened: isNavOpened }"
+    class="min-w-80 p-8 flex flex-col gap-8 transition-all duration-200"
+  >
     <section class="grid justify-items-center">
       <img class="size-16 rounded-full" src="http://picsum.photos/100.webp" />
       <div class="font-[600]">Urooj Khan</div>
@@ -23,16 +26,24 @@
       </RouterLink>
     </section>
     <section
-      class="mt-auto font-bold border-2 border-gray-400 border-dashed rounded-lg py-16 text-center"
+      class="mt-auto font-bold border-2 border-gray-400 border-dashed rounded-lg py-4 text-center"
     >
       Download the App
     </section>
+    <div
+      @click="isNavOpened = false"
+      class="size-10 bg-white border border-gray-300 cursor-pointer grid place-items-center rounded-full fixed top-1/2 -translate-y-1/2 left-64 opacity-0 transition-all duration-200 delay-200 hover:bg-black hover:text-white"
+      :class="{ 'translate-x-24 opacity-100': isNavOpened }"
+    >
+      <Icon icon="humbleicons:times" class="text-xl" />
+    </div>
   </nav>
 </template>
 
 <script lang="ts" setup>
 import { RouterLink } from "vue-router";
 import { Icon } from "@iconify/vue";
+import { isNavOpened } from "../store/NavStore";
 
 const routes = [
   {
@@ -77,7 +88,11 @@ const routes = [
 
 @media screen and (width<=768px) {
   nav {
-    @apply -translate-x-full bg-white absolute left-0 min-w-80 h-full;
+    @apply translate-x-0 shadow-[4px_0_16px_4px_rgba(0,0,0,0.2)] bg-white absolute left-0 h-full;
+  }
+
+  nav:not(.opened) {
+    @apply -translate-x-full;
   }
 }
 </style>
