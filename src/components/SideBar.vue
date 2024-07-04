@@ -32,8 +32,8 @@
     </section>
     <div
       @click="isNavOpened = false"
-      class="size-10 bg-white border border-gray-300 cursor-pointer grid place-items-center rounded-full fixed top-1/2 -translate-y-1/2 left-64 opacity-0 transition-all duration-200 delay-200 hover:bg-black hover:text-white"
-      :class="{ 'translate-x-24 opacity-100': isNavOpened }"
+      class="md:hidden size-10 bg-white border border-gray-300 cursor-pointer grid place-items-center rounded-full fixed top-1/2 -translate-y-1/2 left-64 opacity-0 transition-all duration-200 delay-200 hover:bg-black hover:text-white"
+      :class="{ 'translate-x-[72px] opacity-100': isNavOpened }"
     >
       <Icon icon="humbleicons:times" class="text-xl" />
     </div>

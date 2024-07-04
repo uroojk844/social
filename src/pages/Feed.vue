@@ -1,7 +1,7 @@
 <template>
   <main class="">
     <section class="flex items-center">
-      <button class="mr-4" @click="isNavOpened = !isNavOpened">
+      <button class="mr-4 md:hidden" @click="isNavOpened = !isNavOpened">
         <Icon icon="gravity-ui:bars-unaligned" class="text-xl" />
       </button>
       <div class="text-xl font-bold">Feeds</div>
