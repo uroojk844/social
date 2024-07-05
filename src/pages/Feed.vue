@@ -1,5 +1,5 @@
 <template>
-  <main class="">
+  <main class="grid gap-2">
     <section class="flex items-center sticky top-0 bg-white py-4 sm:py-8 z-[9]">
       <button class="mr-4 md:hidden" @click="isNavOpened = !isNavOpened">
         <Icon icon="gravity-ui:bars-unaligned" class="text-xl" />
