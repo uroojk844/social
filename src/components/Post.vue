@@ -20,20 +20,22 @@
       asperiores, iusto beatae assumenda aut vel?
     </div>
 
-    <div v-if="$props.post?.type == 'image'" class="flex gap-1 max-w-full">
+    <div v-if="$props.post?.type == 'image'" class="post-container">
       <div
         v-for="(_, index) in images < 4 ? images : 3"
         :key="index"
-        :class="index == 2 ? 'flex-2' : 'flex-1'"
+        class="w-full"
+        :src="'http://picsum.photos/400/300.webp?' + (index + 1)"
       >
         <img
           :src="'http://picsum.photos/400/300.webp?' + (index + 1)"
-          class="rounded-xl h-full object-cover"
+          class="rounded-xl h-full object-cover w-full"
         />
       </div>
+
       <div
         v-if="images > 3"
-        class="relative rounded-xl overflow-hidden font-bold text-xl max-w-28 w-full"
+        class="more relative rounded-xl overflow-hidden font-bold text-5xl w-full"
       >
         <img
           src="http://picsum.photos/400/300.webp?4"
@@ -43,7 +45,7 @@
         <div
           class="absolute cursor-pointer inset-0 centered backdrop-blur-sm text-white text-center"
         >
-          {{ images - 3 }} more images
+          +{{ images - 3 }}
         </div>
       </div>
     </div>
@@ -66,11 +68,11 @@
         @click="() => likePost($props.post.id)"
       >
         <Icon :icon="item.icon" class="text-2xl" />
-        <span class="capitalize">{{ item.label }}</span>
+        <span class="max-sm:hidden capitalize">{{ item.label }}</span>
       </div>
 
       <div
-        class="pink ml-auto text-white px-4 py-1.5 rounded-full cursor-pointer"
+        class="hidden pink ml-auto text-white px-4 py-1.5 rounded-full cursor-pointer"
       >
         🔥woow!!!
       </div>
@@ -92,4 +94,32 @@ defineProps<{
   };
 }>();
 </script>
-../store/post.store ../store/post
+
+<style scoped>
+.post-container {
+  @apply grid grid-cols-2 gap-2;
+}
+
+.post-container div {
+  transition: 0.5s;
+}
+
+@media screen and (min-width: 768px) {
+  .post-container {
+    @apply flex h-64;
+  }
+
+  .post-container div {
+    @apply flex-1;
+    transition: 0.25s ease;
+  }
+
+  .post-container div:nth-child(3) {
+    flex: 2 2 0;
+  }
+
+  .post-container div:not(.more):hover {
+    flex: 5 5 0;
+  }
+}
+</style>

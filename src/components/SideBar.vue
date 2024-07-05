@@ -1,7 +1,7 @@
 <template>
   <nav
     :class="{ opened: isNavOpened }"
-    class="min-w-80 p-8 flex flex-col gap-8 transition-all duration-200"
+    class="min-w-80 p-8 flex flex-col gap-8 transition-all duration-200 z-10"
   >
     <section class="grid justify-items-center">
       <img class="size-16 rounded-full" src="http://picsum.photos/100.webp" />

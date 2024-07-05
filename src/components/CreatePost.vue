@@ -20,7 +20,7 @@
         class="flex gap-1 items-center cursor-pointer"
       >
         <Icon :icon="item.icon" class="text-xl" />
-        <span>{{ item.label }}</span>
+        <span class="max-sm:hidden">{{ item.label }}</span>
       </div>
 
       <div

@@ -14,13 +14,13 @@ import { RouterView } from "vue-router";
 </template>
 
 <style scoped>
-@media screen and (600px < width <= 768px) {
+@media screen and (600px <= width <= 768px) {
   section {
     @apply grid-cols-[auto_max-content];
   }
 }
 
-@media screen and (width <= 600px) {
+@media screen and (width < 600px) {
   section {
     @apply grid-cols-[1fr];
   }
