@@ -9,8 +9,49 @@ body,
 #app {
   height: 100vh;
   height: 100dvh;
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: Poppins, serif;
+}
+
+.lightblue {
+  background-color: #dfebff;
+}
+
+.slate {
+  background-color: #8697b3;
+}
+
+.lightyellow {
+  background-color: #fff6df;
+}
+
+.pink {
+  background-color: #fb88a9;
+}
+
+.grey {
+  background-color: #f3f1f1;
+}
+
+.purple {
+  background-color: #f3dfff;
+}
+
+.darkpurple {
+  background-color: #b191c5;
+}
+
+.centered {
+  @apply grid place-items-center;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-gray-200 cursor-pointer rounded;
 }

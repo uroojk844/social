@@ -1,6 +1,6 @@
 <template>
   <main class="">
-    <section class="flex items-center">
+    <section class="flex items-center mb-8">
       <button class="mr-4 md:hidden" @click="isNavOpened = !isNavOpened">
         <Icon icon="gravity-ui:bars-unaligned" class="text-xl" />
       </button>
@@ -18,13 +18,21 @@
         </li>
       </ul>
     </section>
+
+    <section class="grid gap-3">
+      <Post v-for="(post, index) in posts" :key="index" :post="post" />
+      <CreatePost />
+    </section>
   </main>
 </template>
 
 <script lang="ts" setup>
 import { Icon } from "@iconify/vue";
 import { ref } from "vue";
+import Post from "../components/Post.vue";
+import CreatePost from "../components/CreatePost.vue";
 import { isNavOpened } from "../store/NavStore";
+import { posts } from "../store/PostStore";
 const current = ref("Recents");
 const filters = ["Recents", "Friends", "Popular"];
 </script>
