@@ -59,12 +59,14 @@
           { icon: 'majesticons:comment-2-text', label: 'comment' },
         ]"
         :key="index"
-        :class="{ pink: $props.post?.isLiked }"
         class="flex gap-1 items-center text-gray-400 cursor-pointer"
+        :class="{
+          'text-pink-400': $props.post.isLiked && item.label == 'like',
+        }"
         @click="() => likePost($props.post.id)"
       >
-        <Icon :icon="item.icon" class="text-xl" />
-        <span>{{ item.label }}</span>
+        <Icon :icon="item.icon" class="text-2xl" />
+        <span class="capitalize">{{ item.label }}</span>
       </div>
 
       <div
@@ -78,7 +80,7 @@
 
 <script lang="ts" setup>
 import { Icon } from "@iconify/vue";
-import { likePost } from "../store/PostStore";
+import { likePost } from "../store/post.store";
 
 const images = 7;
 
@@ -90,3 +92,4 @@ defineProps<{
   };
 }>();
 </script>
+../store/post.store ../store/post

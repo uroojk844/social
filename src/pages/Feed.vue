@@ -32,7 +32,8 @@ import { ref } from "vue";
 import Post from "../components/Post.vue";
 import CreatePost from "../components/CreatePost.vue";
 import { isNavOpened } from "../store/NavStore";
-import { posts } from "../store/PostStore";
+import { posts } from "../store/post.store";
 const current = ref("Recents");
 const filters = ["Recents", "Friends", "Popular"];
 </script>
+../store/post.store ../store/post ../store/post.store

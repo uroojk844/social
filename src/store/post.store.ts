@@ -1,6 +1,7 @@
-import { isReactive, reactive } from "vue";
+import { reactive } from "vue";
+import { Post } from "../interfaces/post.interface";
 
-export const posts = reactive([
+export const posts = reactive<Post[]>([
   {
     id: 1,
     type: "image",
@@ -24,5 +25,7 @@ export const posts = reactive([
 ]);
 
 export function likePost(id: Number) {
-  posts.find((post) => post.id == id).isLiked = true;
+  const post = posts.find((post) => post.id == id)!;
+  post.isLiked = !post.isLiked;
+  console.log(posts);
 }
