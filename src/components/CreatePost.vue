@@ -1,5 +1,5 @@
 <template>
-  <section class="grey p-6 rounded-2xl grid gap-3">
+  <section class="grey p-6 rounded-2xl grid gap-4">
     <div
       class="flex gap-2 items-center p-2 bg-white rounded-full text-gray-400"
     >

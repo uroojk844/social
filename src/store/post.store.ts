@@ -22,6 +22,16 @@ export const posts = reactive<Post[]>([
     type: "text",
     isLiked: false,
   },
+  {
+    id: 5,
+    type: "video",
+    isLiked: false,
+  },
+  {
+    id: 6,
+    type: "text",
+    isLiked: false,
+  },
 ]);
 
 export function likePost(id: Number) {

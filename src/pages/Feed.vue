@@ -19,9 +19,10 @@
       </ul>
     </section>
 
-    <section class="grid gap-3">
-      <Post v-for="(post, index) in posts" :key="index" :post="post" />
+    <section class="grid gap-3 mb-8">
+      <Post v-for="(post, index) in posts.slice(0,2)" :key="index" :post="post" />
       <CreatePost />
+      <Post v-for="(post, index) in posts" :key="index" :post="post" />
     </section>
   </main>
 </template>

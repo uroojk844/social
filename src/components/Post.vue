@@ -1,7 +1,11 @@
 <template>
   <section
-    class="p-6 rounded-2xl grid gap-3"
-    :class="$props.post?.type == 'image' ? 'lightblue' : 'lightyellow'"
+    class="p-6 rounded-2xl grid gap-4"
+    :class="{
+      lightyellow: $props.post.type == 'text',
+      lightblue: $props.post.type == 'image',
+      purple: $props.post.type == 'video',
+    }"
   >
     <div class="flex gap-2">
       <img class="size-8 rounded-full" src="http://picsum.photos/40.webp" />
@@ -20,6 +24,7 @@
       asperiores, iusto beatae assumenda aut vel?
     </div>
 
+    <!-- Images -->
     <div v-if="$props.post?.type == 'image'" class="post-container">
       <div
         v-for="(_, index) in images < 4 ? images : 3"
@@ -49,6 +54,18 @@
         </div>
       </div>
     </div>
+
+    <!-- Videos -->
+    <iframe
+      v-if="$props.post?.type == 'video'"
+      class="aspect-video rounded-xl w-full"
+      src="https://www.youtube.com/embed/PRwnRKVsBe8"
+      title="Learn Vue 3 - Ep 22, Dependency Injection With Provide and Inject"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
 
     <section class="flex gap-6">
       <IconButton
