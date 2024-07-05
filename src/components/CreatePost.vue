@@ -5,26 +5,26 @@
     >
       <img class="size-6 rounded-full" src="http://picsum.photos/40.webp" />
       <div class="flex-1 text-sm">Share something</div>
-      <Icon icon="mingcute:emoji-fill" />
+      <Icon icon="mingcute:emoji-fill" class="text-2xl" />
     </div>
 
     <section class="flex gap-6">
-      <div
+      <IconButton
         v-for="(item, index) in [
           { icon: 'solar:remove-folder-bold', label: 'File' },
           { icon: 'solar:gallery-bold', label: 'Image' },
-          { icon: 'solar:map-point-bold', label: 'Location' },
-          { icon: 'bi:globe-americas', label: 'Public' },
+          { icon: 'material-symbols:location-on-rounded', label: 'Location' },
+          { icon: 'carbon:earth-filled', label: 'Public' },
         ]"
         :key="index"
-        class="flex gap-1 items-center cursor-pointer"
-      >
-        <Icon :icon="item.icon" class="text-xl" />
-        <span class="max-sm:hidden">{{ item.label }}</span>
-      </div>
+        :icon="item.icon"
+        :label="item.label"
+        class="text-gray-950"
+        icon-size="sm"
+      />
 
       <div
-        class="bg-black ml-auto text-white px-4 py-1.5 rounded-full cursor-pointer"
+        class="text-sm bg-black ml-auto text-white px-6 py-2 rounded-full cursor-pointer"
       >
         Send
       </div>
@@ -34,4 +34,5 @@
 
 <script lang="ts" setup>
 import { Icon } from "@iconify/vue";
+import IconButton from "./IconButton.vue";
 </script>

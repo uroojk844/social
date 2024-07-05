@@ -43,7 +43,7 @@
         />
 
         <div
-          class="absolute cursor-pointer inset-0 centered backdrop-blur-sm text-white text-center"
+          class="absolute cursor-pointer size-full top-0 centered backdrop-blur-sm text-white text-center"
         >
           +{{ images - 3 }}
         </div>
@@ -51,25 +51,12 @@
     </div>
 
     <section class="flex gap-6">
-      <div
-        v-for="(item, index) in [
-          { icon: 'mdi:eye', label: Math.floor(Math.random() * 1000) },
-          {
-            icon: 'ph:heart-fill',
-            label: 'like',
-          },
-          { icon: 'majesticons:comment-2-text', label: 'comment' },
-        ]"
-        :key="index"
-        class="flex gap-1 items-center text-gray-400 cursor-pointer"
-        :class="{
-          'text-pink-400': $props.post.isLiked && item.label == 'like',
-        }"
-        @click="() => likePost($props.post.id)"
-      >
-        <Icon :icon="item.icon" class="text-2xl" />
-        <span class="max-sm:hidden capitalize">{{ item.label }}</span>
-      </div>
+      <IconButton
+        icon="mdi:eye"
+        :label="Math.floor(Math.random() * 1000).toString()"
+      />
+      <LikeButton :id="$props.post.id" :is-liked="$props.post.isLiked" />
+      <IconButton icon="majesticons:comment-2-text" label="comment" />
 
       <div
         class="hidden pink ml-auto text-white px-4 py-1.5 rounded-full cursor-pointer"
@@ -82,16 +69,14 @@
 
 <script lang="ts" setup>
 import { Icon } from "@iconify/vue";
-import { likePost } from "../store/post.store";
+import { Post } from "../interfaces/post.interface";
+import LikeButton from "../components/LikeButton.vue";
+import IconButton from "./IconButton.vue";
 
 const images = 7;
 
 defineProps<{
-  post: {
-    id: Number;
-    type: "text" | "image" | "video";
-    isLiked: Boolean;
-  };
+  post: Post;
 }>();
 </script>
 
@@ -102,16 +87,18 @@ defineProps<{
 
 .post-container div {
   transition: 0.5s;
+  aspect-ratio: 4/3;
 }
 
 @media screen and (min-width: 768px) {
   .post-container {
-    @apply flex h-64;
+    @apply flex h-60;
   }
 
   .post-container div {
     @apply flex-1;
     transition: 0.25s ease;
+    aspect-ratio: unset;
   }
 
   .post-container div:nth-child(3) {

@@ -88,11 +88,11 @@ const routes = [
 
 @media screen and (width<=768px) {
   nav {
-    @apply translate-x-0 shadow-[4px_0_16px_4px_rgba(0,0,0,0.2)] bg-white absolute left-0 h-full;
+    @apply -translate-x-full bg-white absolute left-0 h-full;
   }
 
-  nav:not(.opened) {
-    @apply -translate-x-full;
+  nav.opened {
+    @apply translate-x-0 shadow-[4px_0_16px_4px_rgba(0,0,0,0.2)];
   }
 }
 </style>

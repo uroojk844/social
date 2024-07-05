@@ -6,7 +6,7 @@ import { RouterView } from "vue-router";
 <template>
   <section class="grid h-screen grid-cols-[max-content_auto_max-content]">
     <SideBar />
-    <main class="grid gap-4 content-start p-4 md:p-8 overflow-auto scrollbar">
+    <main class="grid gap-4 content-start px-4 md:px-8 overflow-auto scrollbar">
       <RouterView />
     </main>
     <AsideView />

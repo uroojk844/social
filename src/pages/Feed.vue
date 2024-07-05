@@ -1,10 +1,10 @@
 <template>
   <main class="">
-    <section class="flex items-center mb-8">
+    <section class="flex items-center sticky top-0 bg-white py-4 sm:py-8 z-[9]">
       <button class="mr-4 md:hidden" @click="isNavOpened = !isNavOpened">
         <Icon icon="gravity-ui:bars-unaligned" class="text-xl" />
       </button>
-      <div class="text-xl font-bold">Feeds</div>
+      <div class="text-2xl font-bold">Feeds</div>
 
       <ul class="flex items-center gap-4 ml-auto text-gray-400">
         <li
@@ -36,4 +36,3 @@ import { posts } from "../store/post.store";
 const current = ref("Recents");
 const filters = ["Recents", "Friends", "Popular"];
 </script>
-../store/post.store ../store/post ../store/post.store
