@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import SideBar from "./components/SideBar.vue";
-// import AsideView from "./components/AsideView.vue";
+import AsideView from "./components/AsideView.vue";
 import { RouterView } from "vue-router";
 </script>
 <template>
@@ -9,7 +9,7 @@ import { RouterView } from "vue-router";
     <main class="grid gap-4 content-start p-4 md:p-8 overflow-auto scrollbar">
       <RouterView />
     </main>
-    <!-- <AsideView /> -->
+    <AsideView />
   </section>
 </template>
 
