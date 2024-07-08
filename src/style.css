@@ -55,3 +55,7 @@ body {
 .scrollbar::-webkit-scrollbar-thumb {
   @apply bg-gray-200 cursor-pointer rounded;
 }
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}

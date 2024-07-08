@@ -1,6 +1,6 @@
 <template>
   <section
-    class="p-6 rounded-2xl grid gap-4"
+    class="post p-6 rounded-2xl grid gap-4"
     :class="{
       lightyellow: $props.post.type == 'text',
       lightblue: $props.post.type == 'image',
@@ -26,14 +26,12 @@
 
     <!-- Images -->
     <div v-if="$props.post?.type == 'image'" class="post-container">
-      <div
-        v-for="(_, index) in images < 4 ? images : 3"
-        :key="index"
-        class="w-full"
-        :src="'http://picsum.photos/400/300.webp?' + (index + 1)"
-      >
+      <div v-for="(_, index) in images < 4 ? images : 3" :key="index">
         <img
-          :src="'http://picsum.photos/400/300.webp?' + (index + 1)"
+          :src="
+            'http://picsum.photos/400/300.webp?' +
+            Math.floor(Math.random() * 1000)
+          "
           class="rounded-xl h-full object-cover w-full"
         />
       </div>
@@ -98,6 +96,11 @@ defineProps<{
 </script>
 
 <style scoped>
+.post {
+  container-name: post;
+  container-type: inline-size;
+}
+
 .post-container {
   @apply grid grid-cols-2 gap-2;
 }
@@ -107,11 +110,7 @@ defineProps<{
   aspect-ratio: 4/3;
 }
 
-@media screen and (min-width: 768px) {
-  .post-container {
-    @apply flex h-60;
-  }
-
+@media screen and (min-width: 600px) {
   .post-container div {
     @apply flex-1;
     transition: 0.25s ease;
@@ -122,8 +121,18 @@ defineProps<{
     flex: 2 2 0;
   }
 
+  .post-container:hover div {
+    flex: 1 1 0;
+  }
+
   .post-container div:not(.more):hover {
-    flex: 5 5 0;
+    flex: 2 2 0;
+  }
+}
+
+@container post (width> 600px) {
+  .post-container {
+    @apply flex h-60;
   }
 }
 </style>

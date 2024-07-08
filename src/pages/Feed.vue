@@ -10,7 +10,7 @@
         <li
           v-for="(filter, index) in filters"
           :key="index"
-          class="cursor-pointer font-semibold"
+          class="cursor-pointer font-[500]"
           :class="{ 'text-black': filter == current }"
           @click="current = filter"
         >
