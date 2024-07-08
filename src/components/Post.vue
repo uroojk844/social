@@ -20,8 +20,10 @@
     </div>
 
     <div class="text-sm">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-      asperiores, iusto beatae assumenda aut vel?
+      {{
+        post?.text ||
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam asperiores, iusto beatae assumenda aut vel?"
+      }}
     </div>
 
     <!-- Images -->

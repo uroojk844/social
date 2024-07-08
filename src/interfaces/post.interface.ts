@@ -4,4 +4,5 @@ export interface Post {
   id: Number;
   type: PostType;
   isLiked: boolean;
+  text?: string;
 }

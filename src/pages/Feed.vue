@@ -19,21 +19,29 @@
       </ul>
     </section>
 
-    <section class="grid gap-3 mb-8">
-      <Post v-for="(post, index) in posts.slice(0,2)" :key="index" :post="post" />
-      <CreatePost />
+    <CreatePost />
+    <section v-if="posts.length" class="grid gap-3 mb-8">
       <Post v-for="(post, index) in posts" :key="index" :post="post" />
+    </section>
+    <section class="grid place-items-center h-40" v-else>
+      <Icon icon="svg-spinners:bars-rotate-fade" class="text-3xl" />
     </section>
   </main>
 </template>
 
 <script lang="ts" setup>
 import { Icon } from "@iconify/vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import Post from "../components/Post.vue";
 import CreatePost from "../components/CreatePost.vue";
 import { isNavOpened } from "../store/NavStore";
 import { posts } from "../store/post.store";
 const current = ref("Recents");
 const filters = ["Recents", "Friends", "Popular"];
+
+import { getPosts } from "../store/post.store";
+
+onMounted(() => {
+  getPosts();
+});
 </script>
