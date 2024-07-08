@@ -10,12 +10,12 @@ export function likePost(id: Number) {
 }
 
 export async function getPosts() {
-  const data = await fetch("https://social-backend-phi.vercel.app:3000/posts");
+  const data = await fetch("https://social-backend-phi.vercel.app/posts");
   posts.value = await data.json();
 }
 
 export async function addPost(data: any) {
-  await fetch("https://social-backend-phi.vercel.app:3000/post", {
+  await fetch("https://social-backend-phi.vercel.app/post", {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(data),
@@ -30,7 +30,7 @@ export async function addPost(data: any) {
 }
 
 export async function deletePost(id: Number) {
-  await fetch("https://social-backend-phi.vercel.app:3000/deletePost", {
+  await fetch("https://social-backend-phi.vercel.app/deletePost", {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify({
