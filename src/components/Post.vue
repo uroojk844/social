@@ -14,7 +14,11 @@
         <div class="text-[10px] text-gray-400">2 hours ago</div>
       </div>
 
-      <div class="ml-auto border border-gray-400 size-8 centered rounded-full">
+      <div
+        @click="() => deletePost($props.post.id)"
+        :name="$props.post.id"
+        class="cursor-pointer ml-auto border border-gray-400 size-8 centered rounded-full"
+      >
         <Icon icon="bi:three-dots-vertical" />
       </div>
     </div>
@@ -89,6 +93,7 @@ import { Icon } from "@iconify/vue";
 import { Post } from "../interfaces/post.interface";
 import LikeButton from "../components/LikeButton.vue";
 import IconButton from "./IconButton.vue";
+import { deletePost } from "../store/post.store";
 
 const images = 7;
 

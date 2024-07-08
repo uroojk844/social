@@ -20,11 +20,18 @@
     </section>
 
     <CreatePost />
+
+    <section v-if="isLoading" class="grid place-items-center h-40">
+      <Icon icon="svg-spinners:bars-rotate-fade" class="text-3xl" />
+    </section>
     <section v-if="posts.length" class="grid gap-3 mb-8">
       <Post v-for="(post, index) in posts" :key="index" :post="post" />
     </section>
-    <section class="grid place-items-center h-40" v-else>
-      <Icon icon="svg-spinners:bars-rotate-fade" class="text-3xl" />
+    <section
+      class="grid place-items-center h-40"
+      v-else-if="!isLoading && posts.length == 0"
+    >
+      <h1>Nothing to show!!</h1>
     </section>
   </main>
 </template>
@@ -40,8 +47,9 @@ const current = ref("Recents");
 const filters = ["Recents", "Friends", "Popular"];
 
 import { getPosts } from "../store/post.store";
+const isLoading = ref(true);
 
-onMounted(() => {
-  getPosts();
+onMounted(async () => {
+  getPosts().finally(() => (isLoading.value = false));
 });
 </script>
