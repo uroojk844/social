@@ -1,17 +1,17 @@
 <template>
   <form @submit.prevent="createPost" class="grey p-6 rounded-2xl grid mb-1">
-    <details class="mb-3">
+    <details class="border border-gray-300 mb-3 rounded-3xl">
       <summary
         for="textarea"
-        class="cursor-pointer flex gap-2 items-center p-2 bg-white rounded-full text-gray-400"
+        class="cursor-pointer flex gap-2 items-center p-2 bg-white rounded-full"
       >
         <img class="size-8 rounded-full" src="http://picsum.photos/40.webp" />
-        <div class="flex-1 text-sm">Share something</div>
+        <div class="flex-1 text-sm font-semibold">Urooj Khan</div>
       </summary>
       <textarea
         v-model="text"
         placeholder="Share something"
-        class="mt-4 w-full border border-gray-300 outline-none rounded-xl scrollbar-none h-32 p-2 transition-all duration-500"
+        class="w-full outline-none rounded-3xl scrollbar-none h-32 p-2 transition-all duration-500"
       ></textarea>
     </details>
 
@@ -54,3 +54,15 @@ async function createPost() {
   text.value = "";
 }
 </script>
+
+<style scoped>
+details {
+  transition: 500ms ease;
+  height: 50px;
+  overflow: hidden;
+}
+
+details[open] {
+  height: 176px;
+}
+</style>

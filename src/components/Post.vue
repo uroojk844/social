@@ -122,6 +122,7 @@ defineProps<{
     @apply flex-1;
     transition: 0.25s ease;
     aspect-ratio: unset;
+    cursor: pointer;
   }
 
   .post-container div:nth-child(3) {
