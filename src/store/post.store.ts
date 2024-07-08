@@ -17,7 +17,7 @@ export async function getPosts() {
 }
 
 export async function addPost(data: any) {
-  await fetch(`${url}/post"`, {
+  await fetch(`${url}/post`, {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(data),
