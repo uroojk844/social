@@ -1,4 +1,4 @@
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import { Post } from "../interfaces/post.interface";
 import { AlertStore } from "./AlertStore";
 
