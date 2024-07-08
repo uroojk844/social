@@ -4,18 +4,20 @@ import { AlertStore } from "./AlertStore";
 
 export let posts = ref<Post[]>([]);
 
+const url = import.meta.env.VITE_APP_BACKEND_URL;
+
 export function likePost(id: Number) {
   const post = posts.value.find((post) => post.id == id)!;
   post.isLiked = !post.isLiked;
 }
 
 export async function getPosts() {
-  const data = await fetch("http://localhost:3000/posts");
+  const data = await fetch(`${url}/posts`);
   posts.value = await data.json();
 }
 
 export async function addPost(data: any) {
-  await fetch("http://localhost:3000/post", {
+  await fetch(`${url}/post"`, {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(data),
@@ -30,7 +32,7 @@ export async function addPost(data: any) {
 }
 
 export async function deletePost(id: Number) {
-  await fetch("http://localhost:3000/deletePost", {
+  await fetch(`${url}/deletePost`, {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify({
