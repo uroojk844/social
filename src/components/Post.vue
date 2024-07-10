@@ -10,22 +10,30 @@
     <div class="flex gap-2">
       <img class="size-8 rounded-full" src="http://picsum.photos/40.webp" />
       <div class="font-semibold">
-        <div class="text-sm">George Lobko</div>
-        <div class="text-[10px] text-gray-400">2 hours ago</div>
+        <div class="text-sm">{{ $props.post.userid?.name }}</div>
+        <div class="text-[10px] text-gray-400">
+          {{ moment($props.post.createdAt).fromNow() }}
+        </div>
       </div>
 
-      <div
-        @click="() => deletePost($props.post.id)"
-        :name="$props.post.id"
-        class="cursor-pointer ml-auto border border-gray-400 size-8 centered rounded-full"
-      >
-        <Icon icon="bi:three-dots-vertical" />
-      </div>
+      <details class=" ml-auto">
+        <summary
+          popovertarget="menu"
+          :name="$props.post._id"
+          class="cursor-pointer border border-gray-400 size-8 centered rounded-full"
+        >
+          <Icon icon="bi:three-dots-vertical" />
+        </summary> 
+
+        <div id="menu" popover>
+          <div>Delete</div>
+        </div>
+      </details>
     </div>
 
     <div class="text-sm">
       {{
-        post?.text ||
+        post.data?.text ||
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam asperiores, iusto beatae assumenda aut vel?"
       }}
     </div>
@@ -72,11 +80,12 @@
     ></iframe>
 
     <section class="flex gap-6">
-      <IconButton
-        icon="mdi:eye"
-        :label="Math.floor(Math.random() * 1000).toString()"
+      <IconButton icon="mdi:eye" :label="$props.post.views || '0'" />
+      <LikeButton
+        :id="$props.post._id"
+        :is-liked="$props.post.likes?.includes('668d3e4ef1bdb74c3c183e98')"
+        :label="$props.post.likes?.length"
       />
-      <LikeButton :id="$props.post.id" :is-liked="$props.post.isLiked" />
       <IconButton icon="majesticons:comment-2-text" label="comment" />
 
       <div
@@ -93,7 +102,11 @@ import { Icon } from "@iconify/vue";
 import { Post } from "../interfaces/post.interface";
 import LikeButton from "../components/LikeButton.vue";
 import IconButton from "./IconButton.vue";
-import { deletePost } from "../store/post.store";
+
+// import { usePostStore } from "../store/post.store";
+// const postStore = usePostStore();
+// @click="() => postStore.deletePost($props.post._id)"
+import moment from "moment";
 
 const images = 7;
 

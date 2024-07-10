@@ -1,18 +1,19 @@
 <template>
   <IconButton
     :class="{ 'text-pink-400': $props.isLiked }"
-    @click="() => likePost($props.id)"
+    @click="() => postStore.likePost($props.id)"
     icon="ph:heart-fill"
-    label="like"
+    :label="label"
   />
 </template>
 +
 <script lang="ts" setup>
-import { likePost } from "../store/post.store";
 import IconButton from "../components/IconButton.vue";
-
+import { usePostStore } from "../store/post.store";
+const postStore = usePostStore();
 defineProps<{
-  id: Number;
+  id: string;
   isLiked: Boolean;
+  label: number;
 }>();
 </script>

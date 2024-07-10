@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="AlertStore?.type"
+    v-if="AlertStore.type"
     class="from-right flex gap-4 items-center p-4 border-l-8 rounded-md fixed right-4 bottom-32 max-w-72 w-full"
     :class="
       AlertStore.type == 'error'
@@ -28,11 +28,20 @@ import { Icon } from "@iconify/vue";
 
 <style scoped>
 .from-right {
-  animation: floatIn 0.5s ease;
+  animation: floatIn 2s ease;
 }
 
 @keyframes floatIn {
-  from {
+  0% {
+    transform: translateX(calc(100% + 16px));
+  }
+  25% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(0);
+  }
+  100% {
     transform: translateX(calc(100% + 16px));
   }
 }

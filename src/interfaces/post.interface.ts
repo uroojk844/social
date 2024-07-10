@@ -1,8 +1,20 @@
 export type PostType = "text" | "image" | "video";
 
 export interface Post {
-  id: Number;
+  _id: string;
+  userid: {
+    _id: string;
+    name: string;
+  };
   type: PostType;
-  isLiked: boolean;
-  text?: string;
+  data: {
+    text: string;
+    images: String[];
+    video: String[];
+  };
+  likes: string[];
+  comments: string[];
+  views: string;
+  createdAt: string;
+  updatedAt: string;
 }

@@ -42,15 +42,18 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import IconButton from "./IconButton.vue";
-import { addPost } from "../store/post.store";
+import { usePostStore } from "../store/post.store";
+const postStore = usePostStore();
 const text = ref("");
 
 async function createPost() {
-  let data = {
+  let post = {
     type: "text",
-    text: text.value,
+    data: {
+      text: text.value,
+    },
   };
-  await addPost(data);
+  await postStore.addPost(post);
   text.value = "";
 }
 </script>

@@ -42,14 +42,17 @@ import { onMounted, ref } from "vue";
 import Post from "../components/Post.vue";
 import CreatePost from "../components/CreatePost.vue";
 import { isNavOpened } from "../store/NavStore";
-import { posts } from "../store/post.store";
 const current = ref("Recents");
 const filters = ["Recents", "Friends", "Popular"];
-
-import { getPosts } from "../store/post.store";
 const isLoading = ref(true);
 
-onMounted(async () => {
-  getPosts().finally(() => (isLoading.value = false));
+import { usePostStore } from "../store/post.store";
+import { storeToRefs } from "pinia";
+
+const postStore = usePostStore();
+const { posts } = storeToRefs(postStore);
+
+onMounted(() => {
+  postStore.loadPosts().finally(() => (isLoading.value = false));
 });
 </script>
