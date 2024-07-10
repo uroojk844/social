@@ -16,26 +16,49 @@
         </div>
       </div>
 
-      <details class="ml-auto">
-        <summary
-          popovertarget="menu"
+      <section class="ml-auto relative">
+        <div
+          @click="menuToggle = !menuToggle"
           :name="$props.post._id"
           class="cursor-pointer border border-gray-400 size-8 centered rounded-full"
         >
           <Icon icon="bi:three-dots-vertical" />
-        </summary>
-
-        <div id="menu" popover>
-          <div>Delete</div>
         </div>
-      </details>
+
+        <div
+          :class="{ hidden: !menuToggle }"
+          class="menu absolute min-w-32 shadow rounded-xl overflow-hidden -left-4 -translate-x-full top-0 bg-white border"
+        >
+          <div
+            v-for="(option, index) in [
+              {
+                icon: 'solar:trash-bin-trash-bold',
+                label: 'delete',
+                action: () => postStore.deletePost($props.post._id),
+              },
+              {
+                icon: 'ic:round-mode-edit',
+                label: 'edit',
+              },
+              {
+                icon: 'material-symbols:cancel',
+                label: 'close',
+                action: () => (menuToggle = !menuToggle),
+              },
+            ]"
+            :key="index"
+            @click="option?.action"x
+            class="flex items-center gap-2 py-2 px-3 capitalize text-sm cursor-pointer hover:bg-gray-200 active:bg-black/15"
+          >
+            <Icon :icon="option.icon" class="text-lg" />
+            {{ option.label }}
+          </div>
+        </div>
+      </section>
     </div>
 
     <div class="text-sm">
-      {{
-        post.data?.text ||
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam asperiores, iusto beatae assumenda aut vel?"
-      }}
+      {{ post.data?.text }}
     </div>
 
     <!-- Images -->
@@ -80,7 +103,7 @@
     ></iframe>
 
     <section class="flex gap-6">
-      <IconButton icon="mdi:eye" :label="$props.post.views || '0'" />
+      <!-- <IconButton icon="mdi:eye" :label="$props.post.views || '0'" /> -->
       <LikeButton
         :id="$props.post._id"
         :is-liked="$props.post.likes?.includes('668d3e4ef1bdb74c3c183e98')"
@@ -103,10 +126,13 @@ import { Post } from "../interfaces/post.interface";
 import LikeButton from "../components/LikeButton.vue";
 import IconButton from "./IconButton.vue";
 
-// import { usePostStore } from "../store/post.store";
-// const postStore = usePostStore();
-// @click="() => postStore.deletePost($props.post._id)"
+import { usePostStore } from "../store/post.store";
+const postStore = usePostStore();
+
 import moment from "moment";
+import { ref } from "vue";
+
+const menuToggle = ref(false);
 
 const images = 7;
 
@@ -149,6 +175,10 @@ defineProps<{
   .post-container div:not(.more):hover {
     flex: 2 2 0;
   }
+}
+
+.menu div:nth-child(even) {
+  @apply border-y;
 }
 
 @container post (width> 600px) {
