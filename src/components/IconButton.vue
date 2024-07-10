@@ -17,7 +17,7 @@ import { Icon } from "@iconify/vue";
 withDefaults(
   defineProps<{
     icon: string;
-    label: string;
+    label: string | number;
     iconSize?: "sm" | "md";
   }>(),
   {

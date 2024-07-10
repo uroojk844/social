@@ -13,7 +13,7 @@ import { usePostStore } from "../store/post.store";
 const postStore = usePostStore();
 defineProps<{
   id: string;
-  isLiked: Boolean;
+  isLiked: boolean;
   label: number;
 }>();
 </script>

@@ -16,14 +16,14 @@
         </div>
       </div>
 
-      <details class=" ml-auto">
+      <details class="ml-auto">
         <summary
           popovertarget="menu"
           :name="$props.post._id"
           class="cursor-pointer border border-gray-400 size-8 centered rounded-full"
         >
           <Icon icon="bi:three-dots-vertical" />
-        </summary> 
+        </summary>
 
         <div id="menu" popover>
           <div>Delete</div>

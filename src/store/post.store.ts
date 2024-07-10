@@ -6,8 +6,7 @@ const url = import.meta.env.VITE_APP_BACKEND_URL;
 
 export const usePostStore = defineStore("posts", {
   state: () => ({
-    /** @type Post[] */
-    posts: [],
+    posts: [] as Post[],
   }),
   getters: {
     getPosts(state) {
@@ -26,7 +25,7 @@ export const usePostStore = defineStore("posts", {
           console.log(res);
 
           if (res?.success) {
-            const idx = this.posts.findIndex((post: Post) => post._id == id);
+            const idx = this.posts.findIndex((post) => post._id == id);
             this.posts[idx] = res.success;
             AlertStore.type = "success";
           } else {
@@ -49,7 +48,6 @@ export const usePostStore = defineStore("posts", {
           if (d?.success) {
             this.posts.unshift(d.success as Post);
             AlertStore.type = "success";
-            AlertStore.text = "Post successfully!!";
           } else AlertStore.type = "error";
         });
     },
