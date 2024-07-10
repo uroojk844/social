@@ -51,7 +51,7 @@ async function createPost() {
     type: "text",
     data: {
       text: text.value,
-    },
+    }
   };
   await postStore.addPost(post);
   text.value = "";

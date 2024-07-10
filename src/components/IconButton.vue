@@ -7,7 +7,7 @@
         'text-2xl': $props.iconSize == 'md',
       }"
     />
-    <span class="max-sm: capitalize">{{ $props.label }}</span>
+    <span class="max-sm:hidden capitalize">{{ $props.label }}</span>
   </div>
 </template>
 
