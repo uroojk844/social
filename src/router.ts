@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import { useUserStore } from "./store/user.store.ts";
-const { isLogin } = useUserStore();
+import { isLogin } from "./store/user.store";
 
 export const routes = <RouteRecordRaw[]>[
   {
@@ -45,16 +44,7 @@ export const router = createRouter({
   history: createWebHistory(),
 });
 
-router.beforeEach((to, from) => {
-  // instead of having to check every route record with
-  // to.matched.some(record => record.meta.requiresAuth)
-  if (isLogin) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
-    return {
-      path: "/login",
-      // save the location we were at to come back later
-      query: { redirect: to.fullPath },
-    };
-  }
+router.beforeEach((to, from, next) => {
+  if (!isLogin() && to.name != "Login") next({ name: "Login" });
+  else next();
 });

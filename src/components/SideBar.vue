@@ -25,11 +25,14 @@
         </div>
       </RouterLink>
     </section>
-    <section
-      class="mt-auto font-bold border-2 border-gray-400 border-dashed rounded-lg py-4 text-center"
+
+    <button
+      @click="logout"
+      class="mt-auto py-3 px-4 rounded-xl font-semibold active flex items-center gap-2 transition-all duration-300 hover:bg-black hover:text-white"
     >
-      Download the App
-    </section>
+      <Icon icon="solar:logout-3-bold" class="text-lg" />
+      Logout
+    </button>
     <div
       @click="isNavOpened = false"
       class="md:hidden size-10 bg-white border border-gray-300 cursor-pointer grid place-items-center rounded-full fixed top-1/2 -translate-y-1/2 left-64 opacity-0 transition-all duration-200 delay-200 hover:bg-black hover:text-white"
@@ -44,6 +47,7 @@
 import { RouterLink } from "vue-router";
 import { Icon } from "@iconify/vue";
 import { isNavOpened } from "../store/NavStore";
+import { logout } from "../store/user.store.ts";
 
 const routes = [
   {

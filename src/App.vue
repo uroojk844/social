@@ -3,10 +3,11 @@ import SideBar from "./components/SideBar.vue";
 import AsideView from "./components/AsideView.vue";
 import { RouterView } from "vue-router";
 import Alert from "./components/Alert.vue";
+import { isLogin } from "./store/user.store.ts";
 </script>
 <template>
   <section
-    v-if="false"
+    v-if="isLogin()"
     class="grid h-screen grid-cols-[max-content_auto_max-content]"
   >
     <SideBar />
