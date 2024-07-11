@@ -25,7 +25,7 @@
       <Icon icon="svg-spinners:bars-rotate-fade" class="text-3xl" />
     </section>
     <section v-if="posts.length" class="grid gap-3 mb-8">
-      <Post v-for="(post, index) in posts" :key="index" :post="post" />
+      <Post v-for="post in posts" :key="post._id" :post="post" />
     </section>
     <section
       class="grid place-items-center h-40"

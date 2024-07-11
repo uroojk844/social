@@ -3,15 +3,20 @@ import SideBar from "./components/SideBar.vue";
 import AsideView from "./components/AsideView.vue";
 import { RouterView } from "vue-router";
 import Alert from "./components/Alert.vue";
-
 </script>
 <template>
-  <section class="grid h-screen grid-cols-[max-content_auto_max-content]">
+  <section
+    v-if="false"
+    class="grid h-screen grid-cols-[max-content_auto_max-content]"
+  >
     <SideBar />
     <main class="grid gap-4 content-start px-4 md:px-8 overflow-auto scrollbar">
       <RouterView />
     </main>
     <AsideView />
+  </section>
+  <section v-else>
+    <RouterView />
   </section>
   <Alert />
 </template>

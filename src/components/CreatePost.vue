@@ -31,9 +31,10 @@
       />
 
       <button
-        class="text-sm bg-black ml-auto text-white px-6 py-2 rounded-full cursor-pointer"
+        :disabled="isLoading"
+        class="text-sm disabled:bg-gray-400 disabled:cursor-not-allowed bg-black ml-auto text-white px-6 py-2 rounded-full cursor-pointer"
       >
-        Send
+        {{ isLoading ? "Posting..." : "Send" }}
       </button>
     </section>
   </form>
@@ -45,16 +46,19 @@ import IconButton from "./IconButton.vue";
 import { usePostStore } from "../store/post.store";
 const postStore = usePostStore();
 const text = ref("");
+const isLoading = ref(false);
 
 async function createPost() {
+  isLoading.value = true;
   let post = {
     type: "text",
     data: {
       text: text.value,
-    }
+    },
   };
   await postStore.addPost(post);
   text.value = "";
+  isLoading.value = false;
 }
 </script>
 
