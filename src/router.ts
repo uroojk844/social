@@ -44,7 +44,7 @@ export const router = createRouter({
   history: createWebHistory(),
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _, next) => {
   if (!isLogin() && to.name != "Login") next({ name: "Login" });
   else next();
 });
