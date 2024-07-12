@@ -1,9 +1,9 @@
 <template>
   <form @submit.prevent="createPost" class="grey p-6 rounded-2xl grid mb-1">
-    <details class="border border-gray-300 mb-3 rounded-3xl">
+    <details class="border border-gray-300 mb-3 rounded-3xl bg-white">
       <summary
         for="textarea"
-        class="cursor-pointer flex gap-2 items-center p-2 bg-white rounded-full"
+        class="cursor-pointer flex gap-2 items-center p-2 rounded-full"
       >
         <img class="size-8 rounded-full" src="http://picsum.photos/40.webp" />
         <div class="flex-1 text-sm font-semibold">Urooj Khan</div>
@@ -64,6 +64,7 @@ async function createPost() {
 
 <style scoped>
 details {
+  all: unset;
   transition: 500ms ease;
   height: 50px;
   overflow: hidden;
