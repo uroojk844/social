@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="createPost" class="grey p-6 rounded-2xl grid mb-1">
-    <details class="border border-gray-300 mb-3 rounded-3xl bg-white">
+    <details>
       <summary
         for="textarea"
         class="cursor-pointer flex gap-2 items-center p-2 rounded-full"
@@ -11,7 +11,7 @@
       <textarea
         v-model="text"
         placeholder="Share something"
-        class="w-full outline-none rounded-3xl scrollbar-none h-32 p-2 transition-all duration-500"
+        class="w-full outline-none rounded-3xl scrollbar-none h-32 py-2 px-4 transition-all duration-500"
       ></textarea>
     </details>
 
@@ -64,10 +64,8 @@ async function createPost() {
 
 <style scoped>
 details {
-  all: unset;
   transition: 500ms ease;
-  height: 50px;
-  overflow: hidden;
+  @apply border h-12 overflow-hidden border-gray-300 mb-3 rounded-3xl bg-white;
 }
 
 details[open] {

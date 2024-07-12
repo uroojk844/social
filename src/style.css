@@ -52,6 +52,10 @@ body {
   width: 8px;
 }
 
+summary::-webkit-details-marker {
+  display: none;
+}
+
 .scrollbar::-webkit-scrollbar-thumb {
   @apply bg-gray-200 cursor-pointer rounded;
 }
