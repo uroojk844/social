@@ -6,7 +6,7 @@
         class="cursor-pointer flex gap-2 items-center p-2 rounded-full"
       >
         <img class="size-8 rounded-full" src="http://picsum.photos/40.webp" />
-        <div class="flex-1 text-sm font-semibold">Urooj Khan</div>
+        <div class="flex-1 text-sm font-semibold">{{ getUser()?.name }}</div>
       </summary>
       <textarea
         v-model="text"
@@ -18,7 +18,7 @@
     <section class="flex gap-6">
       <IconButton
         v-for="(item, index) in [
-          { icon: 'solar:remove-folder-bold', label: 'File' },
+          // { icon: 'solar:remove-folder-bold', label: 'File' },
           { icon: 'solar:gallery-bold', label: 'Image' },
           { icon: 'material-symbols:location-on-rounded', label: 'Location' },
           { icon: 'carbon:earth-filled', label: 'Public' },
@@ -47,6 +47,7 @@ import { usePostStore } from "../store/post.store";
 const postStore = usePostStore();
 const text = ref("");
 const isLoading = ref(false);
+import { getUser } from "../store/user.store";
 
 async function createPost() {
   isLoading.value = true;

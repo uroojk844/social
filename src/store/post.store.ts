@@ -1,6 +1,7 @@
 import { Post } from "../interfaces/post.interface";
 import { AlertStore } from "./AlertStore";
 import { defineStore } from "pinia";
+import { getUser } from "../store/user.store";
 
 const url = import.meta.env.VITE_APP_BACKEND_URL;
 
@@ -19,11 +20,17 @@ export const usePostStore = defineStore("posts", {
       this.posts = await data.json();
     },
     async likePost(id: string) {
-      await fetch(`${url}/post/like/${id}`)
+      if (getUser() == null) return;
+      await fetch(`${url}/post/like`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          postid: id,
+          userid: getUser()?._id,
+        }),
+      })
         .then((res) => res.json())
         .then((res) => {
-          console.log(res);
-
           if (res?.success) {
             const idx = this.posts.findIndex((post) => post._id == id);
             this.posts[idx] = res.success;
@@ -41,7 +48,7 @@ export const usePostStore = defineStore("posts", {
       await fetch(`${url}/post`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, userid: getUser()?._id }),
       })
         .then((res) => res.json())
         .then((d) => {

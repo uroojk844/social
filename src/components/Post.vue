@@ -47,7 +47,8 @@
               },
             ]"
             :key="index"
-            @click="option?.action"x
+            @click="option?.action"
+            x
             class="flex items-center gap-2 py-2 px-3 capitalize text-sm cursor-pointer hover:bg-gray-200 active:bg-black/15"
           >
             <Icon :icon="option.icon" class="text-lg" />
@@ -106,7 +107,7 @@
       <!-- <IconButton icon="mdi:eye" :label="$props.post.views || '0'" /> -->
       <LikeButton
         :id="$props.post._id"
-        :is-liked="$props.post.likes?.includes('668d3e4ef1bdb74c3c183e98')"
+        :is-liked="$props.post.likes?.includes(getUser()?._id!)"
         :label="$props.post.likes?.length"
       />
       <IconButton icon="majesticons:comment-2-text" label="comment" />
@@ -125,6 +126,7 @@ import { Icon } from "@iconify/vue";
 import { Post } from "../interfaces/post.interface";
 import LikeButton from "../components/LikeButton.vue";
 import IconButton from "./IconButton.vue";
+import { getUser } from "../store/user.store";
 
 import { usePostStore } from "../store/post.store";
 const postStore = usePostStore();

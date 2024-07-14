@@ -5,8 +5,8 @@
   >
     <section class="grid justify-items-center">
       <img class="size-16 rounded-full" src="http://picsum.photos/100.webp" />
-      <div class="font-[600]">Urooj Khan</div>
-      <div class="text-xs text-gray-400">@uroojk844</div>
+      <div class="font-[600]">{{ getUser()?.name }}</div>
+      <div class="text-xs text-gray-400">@{{getUser()?.username}}</div>
     </section>
     <section class="grid gap-2">
       <RouterLink
@@ -47,7 +47,7 @@
 import { RouterLink } from "vue-router";
 import { Icon } from "@iconify/vue";
 import { isNavOpened } from "../store/NavStore";
-import { logout } from "../store/user.store.ts";
+import { logout, getUser } from "../store/user.store.ts";
 
 const routes = [
   {
