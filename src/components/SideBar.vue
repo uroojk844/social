@@ -83,7 +83,8 @@ const routes = [
   }
 
   nav.opened {
-    @apply translate-x-0 shadow-[4px_0_16px_4px_rgba(0, 0, 0, 0.2)];
+    @apply translate-x-0;
+    box-shadow: 4px 0 16px 4px rgba(0, 0, 0, 0.2);
   }
 }
 </style>
