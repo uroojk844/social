@@ -3,11 +3,10 @@ import SideBar from "./components/SideBar.vue";
 import AsideView from "./components/AsideView.vue";
 import { RouterView } from "vue-router";
 import Alert from "./components/Alert.vue";
-import { getToken } from "./utils/token";
 </script>
 <template>
   <section
-    v-if="getToken()"
+    v-if="true"
     class="grid h-screen grid-cols-[max-content_auto_max-content]"
   >
     <SideBar />

@@ -1,9 +1,7 @@
 <template>
   <section class="grid grid-cols-2 min-h-dvh">
     <div class="max-sm:hidden right"></div>
-    <div
-      class="w-full h-full grid content-center justify-items-center lightyellow"
-    >
+    <div class="w-full h-full grid content-center justify-items-center lightyellow">
       <h1 class="text-3xl mb-2 font-semibold">Social Media</h1>
       <h1 class="text-xl mb-8">Welcome back!</h1>
       <form @submit.prevent="loginUser" class="grid gap-4">
@@ -16,18 +14,14 @@
           <input type="password" name="password" placeholder=" " required />
         </div>
         <button>Login</button>
-        <RouterLink to="/auth/register" class="text-sm text-black/70"
-          >Don't have an account?
-          <span class="font-semibold text-black">Register</span></RouterLink
-        >
+        <RouterLink to="/auth/register" class="text-sm text-black/70">Don't have an account?
+          <span class="font-semibold text-black">Register</span>
+        </RouterLink>
         <div class="text-center text-black/70 my-4">or</div>
         <div
-          class="flex items-center gap-4 justify-center border border-gray-400 p-2.5 text-center text-sm rounded-md cursor-pointer"
-        >
-          <img
-            src="https://cdn4.iconfinder.com/data/icons/logos-brands-7/512/google_logo-google_icongoogle-512.png"
-            class="size-6"
-          />
+          class="flex items-center gap-4 justify-center border border-gray-400 p-2.5 text-center text-sm rounded-md cursor-pointer">
+          <img src="https://cdn4.iconfinder.com/data/icons/logos-brands-7/512/google_logo-google_icongoogle-512.png"
+            class="size-6" />
           Continue with google
         </div>
       </form>
@@ -36,11 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from "../store/user.store";
-async function loginUser(e: Event) {
-  const formData = new FormData(e.target as HTMLFormElement);
-  const user = Object.fromEntries(formData);
-  useUserStore().login(user as { username: string; password: string });
+async function loginUser() {
 }
 </script>
 

@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import { isLogin } from "./store/user2.store";
-import { getToken } from "./utils/token";
 
 export const routes = <RouteRecordRaw[]>[
   {
@@ -55,9 +53,4 @@ export const routes = <RouteRecordRaw[]>[
 export const router = createRouter({
   routes: routes,
   history: createWebHistory(),
-});
-
-router.beforeEach((to, _, next) => {
-  if (!getToken() && !to.path.startsWith("/auth/")) next({ name: "login" });
-  else next();
 });

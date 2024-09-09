@@ -1,20 +1,21 @@
-export type PostType = "text" | "image" | "video";
+import { Id } from "../../convex/_generated/dataModel";
 
-export interface Post {
-  _id: string;
-  userid: {
-    _id: string;
-    name: string;
-  };
-  type: PostType;
-  data: {
-    text: string;
-    images: String[];
-    video: String[];
-  };
-  likes: string[];
-  comments: string[];
-  views: string;
-  createdAt: string;
-  updatedAt: string;
-}
+export type PostType = "text" | "image" | "video";
+import { v } from "convex/values";
+
+// export interface Post {
+//   userID: 
+// }
+// _id: string;
+// userID: {
+//   id: Id<"users">;
+// };
+// type: PostType;
+// data: {
+//   text: string;
+//   images: String[];
+//   video: String[];
+// };
+// likes: string[];
+// _creationTime: number;
+// comments: string[];
