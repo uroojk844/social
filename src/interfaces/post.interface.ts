@@ -1,7 +1,4 @@
-import { Id } from "../../convex/_generated/dataModel";
-
 export type PostType = "text" | "image" | "video";
-import { v } from "convex/values";
 
 // export interface Post {
 //   userID: 
