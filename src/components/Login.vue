@@ -36,11 +36,11 @@
 </template>
 
 <script setup lang="ts">
-import { login } from "../store/user.store";
+import { useUserStore } from "../store/user.store";
 async function loginUser(e: Event) {
   const formData = new FormData(e.target as HTMLFormElement);
   const user = Object.fromEntries(formData);
-  login(user as { username: string; password: string });
+  useUserStore().login(user as { username: string; password: string });
 }
 </script>
 

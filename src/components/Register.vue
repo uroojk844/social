@@ -79,3 +79,4 @@ const isMatching = computed(() => {
 <style scoped>
 @import "../css/auth.css";
 </style>
+../store/user2.store

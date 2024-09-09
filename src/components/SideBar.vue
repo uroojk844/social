@@ -5,8 +5,8 @@
   >
     <section class="grid justify-items-center">
       <img class="size-16 rounded-full" src="http://picsum.photos/100.webp" />
-      <div class="font-[600]">{{ getUser()?.name }}</div>
-      <div class="text-xs text-gray-400">@{{getUser()?.username}}</div>
+      <div class="font-[600]">{{ userStore.getName }}</div>
+      <div class="text-xs text-gray-400">@{{ userStore.getUserName }}</div>
     </section>
     <section class="grid gap-2">
       <RouterLink
@@ -27,7 +27,7 @@
     </section>
 
     <button
-      @click="logout"
+      @click="userStore.logout"
       class="mt-auto py-3 px-4 rounded-xl font-semibold active flex items-center gap-2 transition-all duration-300 hover:bg-black hover:text-white"
     >
       <Icon icon="solar:logout-3-bold" class="text-lg" />
@@ -47,7 +47,8 @@
 import { RouterLink } from "vue-router";
 import { Icon } from "@iconify/vue";
 import { isNavOpened } from "../store/NavStore";
-import { logout, getUser } from "../store/user.store.ts";
+import { useUserStore } from "../store/user.store.ts";
+const userStore = useUserStore();
 
 const routes = [
   {

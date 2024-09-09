@@ -6,7 +6,7 @@
         class="cursor-pointer flex gap-2 items-center p-2 rounded-full"
       >
         <img class="size-8 rounded-full" src="http://picsum.photos/40.webp" />
-        <div class="flex-1 text-sm font-semibold">{{ getUser()?.name }}</div>
+        <div class="flex-1 text-sm font-semibold">{{ getName }}</div>
       </summary>
       <textarea
         v-model="text"
@@ -47,7 +47,9 @@ import { usePostStore } from "../store/post.store";
 const postStore = usePostStore();
 const text = ref("");
 const isLoading = ref(false);
-import { getUser } from "../store/user.store";
+import { useUserStore } from "../store/user.store";
+
+const { getName } = useUserStore();
 
 async function createPost() {
   isLoading.value = true;
@@ -73,3 +75,4 @@ details[open] {
   height: 176px;
 }
 </style>
+../store/user2.store

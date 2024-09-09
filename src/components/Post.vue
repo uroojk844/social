@@ -107,7 +107,7 @@
       <!-- <IconButton icon="mdi:eye" :label="$props.post.views || '0'" /> -->
       <LikeButton
         :id="$props.post._id"
-        :is-liked="$props.post.likes?.includes(getUser()?._id!)"
+        :is-liked="$props.post.likes?.includes(userStore.getID)"
         :label="$props.post.likes?.length"
       />
       <IconButton icon="majesticons:comment-2-text" label="comment" />
@@ -126,9 +126,10 @@ import { Icon } from "@iconify/vue";
 import { Post } from "../interfaces/post.interface";
 import LikeButton from "../components/LikeButton.vue";
 import IconButton from "./IconButton.vue";
-import { getUser } from "../store/user.store";
-
+import { useUserStore } from "../store/user.store";
 import { usePostStore } from "../store/post.store";
+
+const userStore = useUserStore();
 const postStore = usePostStore();
 
 import moment from "moment";
