@@ -32,14 +32,23 @@ const text = ref("");
 import { useConvexMutation, useConvexQuery } from "@convex-vue/core";
 import { api } from "../../convex/_generated/api";
 import { AlertStore } from "../store/AlertStore";
+import { Id } from "../../convex/_generated/dataModel";
 
 const { mutate, isLoading } = useConvexMutation(api.posts.createPost);
-const { data } = useConvexQuery(api.users.getUsers, {});
-let user = data.value[0]._id;
+const user = useConvexQuery(api.users.getUsers, {});
+
+let userID: Id<"users">;
+if (user.data.value.length > 0) {
+  userID = user.data.value[0]?._id
+}
 
 async function createPost() {
   let data = { text: text.value };
-  mutate({ userID: user, type: "text", data: data }).then(() => AlertStore.type = "success").finally(() => text.value = "");
+  if (!userID.length) {
+    console.log('Add user');
+    return;
+  };
+  mutate({ userID: userID, type: "text", data: data }).then(() => AlertStore.type = "success").finally(() => text.value = "");
 }
 </script>
 
