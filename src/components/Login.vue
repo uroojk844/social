@@ -4,7 +4,7 @@
     <div class="w-full h-full grid content-center justify-items-center lightyellow">
       <h1 class="text-3xl mb-2 font-semibold">Social Media</h1>
       <h1 class="text-xl mb-8">Welcome back!</h1>
-      <form @submit.prevent="loginUser" class="grid gap-4">
+      <form @submit.prevent="" class="grid gap-4">
         <div class="form-group">
           <label for=""> Username </label>
           <input type="text" name="username" placeholder=" " required />
@@ -30,8 +30,15 @@
 </template>
 
 <script setup lang="ts">
-async function loginUser() {
-}
+import { useAuth0 } from '@auth0/auth0-vue';
+import { onMounted } from 'vue';
+
+
+onMounted(() => {
+  const auth0 = useAuth0();
+  auth0.loginWithRedirect();
+})
+
 </script>
 
 <style scoped>

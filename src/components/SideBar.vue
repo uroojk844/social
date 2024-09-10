@@ -1,8 +1,8 @@
 <template>
   <nav :class="{ opened: isNavOpened }" class="h-dvh min-w-80 p-8 flex flex-col gap-8 transition-all duration-200 z-10">
     <section class="grid justify-items-center">
-      <img class="size-16 rounded-full" src="http://picsum.photos/100.webp" />
-      <div class="font-[600]">urooj</div>
+      <img class="size-16 rounded-full" :src="user?.picture" />
+      <div class="font-[600]">{{ user.name }}</div>
       <div class="text-xs text-gray-400">@uroo</div>
     </section>
     <section class="grid gap-2">
@@ -18,7 +18,7 @@
       </RouterLink>
     </section>
 
-    <button @click=""
+    <button @click="logout"
       class="mt-auto py-3 px-4 rounded-xl font-semibold active flex items-center gap-2 transition-all duration-300 hover:bg-black hover:text-white">
       <Icon icon="solar:logout-3-bold" class="text-lg" />
       Logout
@@ -35,6 +35,18 @@
 import { RouterLink } from "vue-router";
 import { Icon } from "@iconify/vue";
 import { isNavOpened } from "../store/NavStore";
+import { useAuth0 } from "@auth0/auth0-vue";
+import { user } from "../store/user.store";
+
+const auth0 = useAuth0();
+
+function logout() {
+  auth0.logout({
+    logoutParams: {
+      returnTo: window.location.origin
+    }
+  });
+}
 
 const routes = [
   {

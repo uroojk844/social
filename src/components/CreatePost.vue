@@ -2,8 +2,8 @@
   <form @submit.prevent="createPost" class="grey p-6 rounded-2xl grid mb-1">
     <details>
       <summary for="textarea" class="cursor-pointer flex gap-2 items-center p-2 rounded-full">
-        <img class="size-8 rounded-full" src="http://picsum.photos/40.webp" />
-        <div class="flex-1 text-sm font-semibold">urooj</div>
+        <img class="size-8 rounded-full" :src="user?.picture" />
+        <div class="flex-1 text-sm font-semibold">{{ user.name }}</div>
       </summary>
       <textarea v-model="text" placeholder="Share something"
         class="w-full outline-none rounded-3xl scrollbar-none h-32 py-2 px-4 transition-all duration-500"></textarea>
@@ -32,13 +32,15 @@ const text = ref("");
 import { useConvexMutation } from "@convex-vue/core";
 import { api } from "../../convex/_generated/api";
 import { AlertStore } from "../store/AlertStore";
-import { Id } from "../../convex/_generated/dataModel";
+import { user } from "../store/user.store";
 
 const { mutate, isLoading } = useConvexMutation(api.posts.createPost);
 
 async function createPost() {
   let data = { text: text.value };
-  mutate({ userID: "j9781p0yfj5vmnrce8evw4wwpn70f05y" as Id<"users">, type: "text", data: data }).then(() => AlertStore.type = "success").finally(() => text.value = "");
+  if (user.value._id) {
+    mutate({ userID: user.value._id, type: "text", data: data }).then(() => AlertStore.type = "success").finally(() => text.value = "");
+  }
 }
 </script>
 

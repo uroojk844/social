@@ -34,19 +34,7 @@ export const routes = <RouteRecordRaw[]>[
   {
     path: "/auth",
     name: "auth",
-    component: () => import("./pages/Auth.vue"),
-    children: [
-      {
-        path: "login",
-        name: "login",
-        component: () => import("./components/Login.vue"),
-      },
-      {
-        path: "register",
-        name: "register",
-        component: () => import("./components/Register.vue"),
-      },
-    ],
+    component: () => import("./pages/Auth.vue")
   },
 ];
 

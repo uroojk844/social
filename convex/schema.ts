@@ -5,10 +5,10 @@ export default defineSchema({
   users: defineTable({
     _id: v.id("users"),
     name: v.string(),
-    username: v.string(),
     email: v.string(),
+    username: v.optional(v.string()),
     password: v.optional(v.string()),
-    picture: v.string(),
+    picture: v.optional(v.string()),
   }),
   posts: defineTable({
     userID: v.id("users"),
