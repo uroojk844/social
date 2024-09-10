@@ -38,7 +38,7 @@ const { mutate, isLoading } = useConvexMutation(api.posts.createPost);
 const user = useConvexQuery(api.users.getUsers, {});
 
 let userID: Id<"users">;
-if (user.data.value.length > 0) {
+if (user.data.value?.length > 0) {
   userID = user.data.value[0]?._id
 }
 
