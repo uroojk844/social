@@ -5,7 +5,7 @@
     purple: $props.post.type == 'video',
   }">
     <div class="flex gap-2">
-      <img class="size-8 rounded-full" src="http://picsum.photos/40.webp" />
+      <img class="size-8 rounded-full" :src="userData.data.value?.picture" />
       <div class="font-semibold">
         <div class="text-sm">{{ userData.data.value?.name }}</div>
         <div class="text-[10px] text-gray-400">
