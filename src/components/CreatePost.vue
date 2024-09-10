@@ -37,18 +37,18 @@ import { Id } from "../../convex/_generated/dataModel";
 const { mutate, isLoading } = useConvexMutation(api.posts.createPost);
 const user = useConvexQuery(api.users.getUsers, {});
 
-let userID: Id<"users">;
-if (user.data.value?.length > 0) {
-  userID = user.data.value[0]?._id
+let userID = ref<Id<"users">>();
+if (user.data.value?.length) {
+  userID.value = user.data.value[0]?._id
 }
 
 async function createPost() {
   let data = { text: text.value };
-  if (!userID.length) {
+  if (!userID.value) {
     console.log('Add user');
     return;
   };
-  mutate({ userID: userID, type: "text", data: data }).then(() => AlertStore.type = "success").finally(() => text.value = "");
+  mutate({ userID: userID.value, type: "text", data: data }).then(() => AlertStore.type = "success").finally(() => text.value = "");
 }
 </script>
 
