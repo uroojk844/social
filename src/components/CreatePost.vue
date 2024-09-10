@@ -29,7 +29,7 @@ import { ref } from "vue";
 import IconButton from "./IconButton.vue";
 const text = ref("");
 
-import { useConvexMutation, useConvexQuery } from "@convex-vue/core";
+import { useConvexMutation } from "@convex-vue/core";
 import { api } from "../../convex/_generated/api";
 import { AlertStore } from "../store/AlertStore";
 import { Id } from "../../convex/_generated/dataModel";
