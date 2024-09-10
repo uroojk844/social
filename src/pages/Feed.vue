@@ -38,8 +38,7 @@ const current = ref("Recents");
 const filters = ["Recents", "Friends", "Popular"];
 
 // convex
-import {  useConvexQuery } from "@convex-vue/core";
+import { useConvexQuery } from "@convex-vue/core";
 import { api } from "../../convex/_generated/api";
-
 const posts = useConvexQuery(api.posts.get, {});
 </script>

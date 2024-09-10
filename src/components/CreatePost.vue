@@ -29,16 +29,17 @@ import { ref } from "vue";
 import IconButton from "./IconButton.vue";
 const text = ref("");
 
-import { useConvexMutation } from "@convex-vue/core";
+import { useConvexMutation, useConvexQuery } from "@convex-vue/core";
 import { api } from "../../convex/_generated/api";
-import { uid } from "../interfaces/user.interface";
 import { AlertStore } from "../store/AlertStore";
 
 const { mutate, isLoading } = useConvexMutation(api.posts.createPost);
+const { data } = useConvexQuery(api.users.getUsers, {});
+let user = data.value[0]._id;
 
 async function createPost() {
   let data = { text: text.value };
-  mutate({ uid: uid, type: "text", data: data }).then(() => AlertStore.type = "success").finally(() => text.value = "");
+  mutate({ userID: user, type: "text", data: data }).then(() => AlertStore.type = "success").finally(() => text.value = "");
 }
 </script>
 

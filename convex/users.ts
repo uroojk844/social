@@ -11,8 +11,6 @@ export const getUsers = query({
 export const getUser = query({
   args: { id: v.id("users") },
   handler: (ctx, args) => {
-    return ctx.db
-      .query("users")
-      .filter((q) => q.eq(q.field("_id"), args.id)).first();
+    return ctx.db.get(args.id);
   },
 });

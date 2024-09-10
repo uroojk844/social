@@ -10,7 +10,7 @@ export const get = query({
 
 export const createPost = mutation({
   args: {
-    uid: v.id("users"),
+    userID: v.id("users"),
     type: v.string(),
     data: v.object({
       text: v.optional(v.string()),
@@ -20,7 +20,7 @@ export const createPost = mutation({
   },
   handler: async (ctx, args) => {
     return await ctx.db.insert("posts", {
-      userID: args.uid,
+      userID: args.userID,
       type: args.type,
       data: args.data,
     });
