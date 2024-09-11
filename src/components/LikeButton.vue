@@ -1,16 +1,27 @@
 <template>
-  <IconButton
-    :class="{ 'text-pink-400': $props.isLiked }"
-    icon="ph:heart-fill"
-    :label="label || 0"
-  />
+  <IconButton :class="{ 'text-pink-400': isLiked }" icon="ph:heart-fill" :label="label || 0" @click="likePost" />
 </template>
-+
 <script lang="ts" setup>
+import { useConvexMutation } from "@convex-vue/core";
 import IconButton from "../components/IconButton.vue";
-defineProps<{
-  id: string;
-  isLiked: boolean;
+
+import { user } from "../store/user.store";
+
+import { Id } from "../../convex/_generated/dataModel";
+import { api } from "../../convex/_generated/api";
+
+const { mutate } = useConvexMutation(api.posts.likePost);
+
+const props = defineProps<{
+  id: Id<"posts">;
+  isLiked: boolean | null;
   label: number;
 }>();
+
+function likePost() {
+  if (user._id) {
+    mutate({ id: props.id, userId: user._id })
+  }
+}
+
 </script>

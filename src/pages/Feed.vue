@@ -57,10 +57,10 @@ onMounted(() => {
       picture: auth0.user.value?.picture,
     }
   }).then((id) => {
-    user.value._id = id;
-    user.value.name = auth0.user.value!.name!;
-    user.value.email = auth0.user.value!.email!;
-    user.value.picture = auth0.user.value!.picture;
+    user._id = id!;
+    user.name = auth0.user.value!.name!;
+    user.email = auth0.user.value!.email!;
+    user.picture = auth0.user.value!.picture;
   })
 });
 

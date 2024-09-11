@@ -10,7 +10,7 @@ export const getUsers = query({
 });
 
 export const getUser = query({
-  args: { id: v.id("users")  },
+  args: { id: v.id("users") },
   handler: (ctx, args) => {
     return ctx.db.get(args.id);
   },
@@ -39,7 +39,7 @@ export const addUser = mutation({
     if (data == null) {
       return ctx.db.insert("users", args.user);
     } else {
-      return data._id as Id<"users">;
+      return (data._id as Id<"users">);
     }
   },
 });

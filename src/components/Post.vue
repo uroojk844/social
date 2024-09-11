@@ -65,7 +65,6 @@
         </div>
       </div>
     </div>
-
     <!-- Videos -->
     <iframe v-if="post?.type == 'video'" class="aspect-video rounded-xl w-full"
       src="https://www.youtube.com/embed/PRwnRKVsBe8"
@@ -75,9 +74,8 @@
 
     <section class="flex gap-6">
       <IconButton icon="mdi:eye" :label="post.views || '0'" />
-      <LikeButton :id="post._id" :is-liked="false" :label="post.likes?.length||0" />
+      <LikeButton :id="post._id" :is-liked="post.likes?.includes(user._id)" :label="post.likes?.length || 0" />
       <IconButton icon="majesticons:comment-2-text" label="comment" />
-
       <div class="hidden pink ml-auto text-white px-4 py-1.5 rounded-full cursor-pointer">
         🔥woow!!!
       </div>
@@ -87,13 +85,15 @@
 
 <script lang="ts" setup>
 import { Icon } from "@iconify/vue";
-import LikeButton from "../components/LikeButton.vue";
+
 import IconButton from "./IconButton.vue";
+import LikeButton from "./LikeButton.vue";
 import moment from "moment";
 import { ref } from "vue";
 
 import { useConvexMutation, useConvexQuery } from "@convex-vue/core";
 import { api } from "../../convex/_generated/api";
+import { user } from "../store/user.store";
 
 const { post } = defineProps(["post"]);
 

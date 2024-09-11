@@ -27,9 +27,17 @@ export const createPost = mutation({
   },
 });
 
+export const likePost = mutation({
+  args: { id: v.id("posts"), userId: v.id("users") },
+  handler: async (ctx, args) => {
+    return await ctx.db.patch(args.id, { likes: [args.userId] });
+  },
+});
+
 export const deletePost = mutation({
   args: { id: v.id("posts") },
   handler: async (ctx, args) => {
     return await ctx.db.delete(args.id);
   },
 });
+
