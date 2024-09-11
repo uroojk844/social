@@ -30,6 +30,7 @@
             {
               icon: 'ic:round-mode-edit',
               label: 'edit',
+              action: () => { openPost(post._id, post.data?.text); menuToggle = false }
             },
             {
               icon: 'material-symbols:cancel',
@@ -94,6 +95,7 @@ import { ref } from "vue";
 import { useConvexMutation, useConvexQuery } from "@convex-vue/core";
 import { api } from "../../convex/_generated/api";
 import { user } from "../store/user.store";
+import { openPost } from "../store/EditPost";
 
 const { post } = defineProps(["post"]);
 

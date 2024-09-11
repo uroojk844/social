@@ -8,6 +8,13 @@ export const get = query({
   },
 });
 
+export const getPost = query({
+  args: { id: v.id("posts") },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.id);
+  },
+});
+
 export const createPost = mutation({
   args: {
     userID: v.id("users"),
@@ -30,7 +37,15 @@ export const createPost = mutation({
 export const likePost = mutation({
   args: { id: v.id("posts"), userId: v.id("users") },
   handler: async (ctx, args) => {
-    return await ctx.db.patch(args.id, { likes: [args.userId] });
+    let { id, userId } = args;
+    let post = await ctx.db.get(id);
+    if (post?.likes?.includes(userId)) {
+      let idx = post.likes.indexOf(userId);
+      post?.likes?.splice(idx, 1);
+    } else {
+      post?.likes?.push(userId);
+    }
+    return await ctx.db.patch(id, { likes: post?.likes });
   },
 });
 
@@ -41,3 +56,9 @@ export const deletePost = mutation({
   },
 });
 
+export const editPost = mutation({
+  args: { id: v.id("posts"), text: v.string() },
+  handler: async (ctx, args) => {
+    return await ctx.db.patch(args.id, { data: { text: args.text } });
+  },
+});

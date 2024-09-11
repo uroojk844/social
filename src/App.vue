@@ -5,6 +5,7 @@ import { RouterView } from "vue-router";
 import Alert from "./components/Alert.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import Auth from "./pages/Auth.vue";
+import EditPost from "./components/EditPost.vue";
 const auth0 = useAuth0();
 </script>
 
@@ -19,6 +20,7 @@ const auth0 = useAuth0();
       <RouterView />
     </main>
     <AsideView />
+    <EditPost />
   </section>
 
   <!-- auth0 redirect -->
