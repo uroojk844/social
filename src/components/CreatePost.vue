@@ -38,8 +38,8 @@ const { mutate, isLoading } = useConvexMutation(api.posts.createPost);
 
 async function createPost() {
   let data = { text: text.value };
-  if (user.value._id) {
-    mutate({ userID: user.value._id, type: "text", data: data }).then(() => AlertStore.type = "success").finally(() => text.value = "");
+  if (user._id) {
+    mutate({ userID: user._id, type: "text", data: data }).then(() => AlertStore.type = "success").finally(() => text.value = "");
   }
 }
 </script>
