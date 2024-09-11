@@ -19,7 +19,7 @@
           <Icon icon="bi:three-dots-vertical" />
         </div>
 
-        <div :class="{ hidden: !menuToggle }"
+        <div v-if="post.userID === user._id " :class="{ hidden: !menuToggle }"
           class="menu absolute min-w-32 shadow rounded-xl overflow-hidden -left-4 -translate-x-full top-0 bg-white border">
           <div v-for="(option, index) in [
             {
