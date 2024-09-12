@@ -15,6 +15,16 @@ export const getPost = query({
   },
 });
 
+export const getUserTextPosts = query({
+  args: { userID: v.id("users") },
+  handler: async (ctx, args) => {
+    return ctx.db
+      .query("posts")
+      .filter((q) => q.eq(q.field("userID"), args.userID))
+      .collect();
+  },
+});
+
 export const createPost = mutation({
   args: {
     userID: v.id("users"),

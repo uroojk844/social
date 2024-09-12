@@ -1,18 +1,13 @@
 <template>
   <main class="grid gap-2">
-    <section class="flex items-center sticky top-0 bg-white py-4 sm:py-8 z-[9]">
-      <button class="mr-4 md:hidden" @click="isNavOpened = !isNavOpened">
-        <Icon icon="gravity-ui:bars-unaligned" class="text-xl" />
-      </button>
-      <div class="text-2xl font-bold">Feeds</div>
-
+    <NavBar title="Feed">
       <ul class="flex items-center gap-4 ml-auto text-gray-400">
         <li v-for="(filter, index) in filters" :key="index" class="cursor-pointer font-[500]"
           :class="{ 'text-black': filter == current }" @click="current = filter">
           {{ filter }}
         </li>
       </ul>
-    </section>
+    </NavBar>
 
     <CreatePost />
 
@@ -33,7 +28,6 @@ import { Icon } from "@iconify/vue";
 import { ref } from "vue";
 import Post from "../components/Post.vue";
 import CreatePost from "../components/CreatePost.vue";
-import { isNavOpened } from "../store/NavStore";
 const current = ref("Recents");
 const filters = ["Recents", "Friends", "Popular"];
 
@@ -42,5 +36,6 @@ const filters = ["Recents", "Friends", "Popular"];
 // convex
 import { useConvexQuery } from "@convex-vue/core";
 import { api } from "../../convex/_generated/api";
+import NavBar from "../components/NavBar.vue";
 const posts = useConvexQuery(api.posts.get, {});
 </script>

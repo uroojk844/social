@@ -9,16 +9,17 @@
         class="w-full outline-none rounded-3xl scrollbar-none h-32 py-2 px-4 transition-all duration-500"></textarea>
     </details>
 
-    <section class="flex gap-6">
+    <section class="flex gap-3">
       <IconButton v-for="(item, index) in [
         { icon: 'solar:gallery-bold', label: 'Image' },
-        { icon: 'material-symbols:location-on-rounded', label: 'Location' },
+        // { icon: 'material-symbols:location-on-rounded', label: 'Location' },
         { icon: 'carbon:earth-filled', label: 'Public' },
       ]" :key="index" :icon="item.icon" :label="item.label" class="text-gray-950" icon-size="sm" />
 
       <button :disabled="isLoading"
-        class="text-sm disabled:bg-gray-400 disabled:cursor-not-allowed bg-black ml-auto text-white px-6 py-2 rounded-full cursor-pointer">
-        {{ isLoading ? "Posting..." : "Send" }}
+        class="text-sm flex items-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed bg-black ml-auto text-white px-6 py-2 rounded-full cursor-pointer">
+        <span class="max-sm:hidden">{{ isLoading ? "Posting..." : "Send" }}</span>
+        <Icon icon="material-symbols:send-rounded"/>
       </button>
     </section>
   </form>
@@ -33,6 +34,7 @@ import { useConvexMutation } from "@convex-vue/core";
 import { api } from "../../convex/_generated/api";
 import { AlertStore } from "../store/AlertStore";
 import { user } from "../store/user.store";
+import { Icon } from "@iconify/vue/dist/iconify.js";
 
 const { mutate, isLoading } = useConvexMutation(api.posts.createPost);
 
