@@ -3,7 +3,7 @@
     <section class="grid justify-items-center">
       <img class="size-16 rounded-full" :src="user?.picture" />
       <div class="font-[600]">{{ user.name }}</div>
-      <div class="text-xs text-gray-400">@uroo</div>
+      <div class="text-xs text-gray-400">@{{ user?.username }}</div>
     </section>
     <section class="grid gap-2">
       <RouterLink v-for="link in routes" :to="link.path"
@@ -36,9 +36,12 @@ import { RouterLink } from "vue-router";
 import { Icon } from "@iconify/vue";
 import { isNavOpened } from "../store/NavStore";
 import { useAuth0 } from "@auth0/auth0-vue";
-import { user } from "../store/user.store";
+import { getData, user } from "../store/user.store";
+import { computed } from "vue";
 
 const auth0 = useAuth0();
+import { onMounted } from 'vue';
+onMounted(getData);
 
 function logout() {
   auth0.logout({
@@ -48,22 +51,22 @@ function logout() {
   });
 }
 
-const routes = [
+const routes = computed(() => [
+  {
+    icon: "solar:user-bold",
+    path: "/profile/"+user._id,
+    name: "Profile",
+  },
   {
     icon: "material-symbols:explore",
     path: "/",
-    name: "News Feed",
+    name: "Feed",
   },
   {
     icon: "heroicons:envelope-solid",
     path: "/messages",
     name: "Messages",
     notification: 3,
-  },
-  {
-    icon: "mdi:facebook-messenger",
-    path: "/forums",
-    name: "Forums",
   },
   {
     icon: "solar:users-group-rounded-bold",
@@ -81,7 +84,7 @@ const routes = [
     path: "/settings",
     name: "Settings",
   },
-];
+]);
 </script>
 
 <style scoped>

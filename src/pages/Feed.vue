@@ -30,7 +30,7 @@
 
 <script lang="ts" setup>
 import { Icon } from "@iconify/vue";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import Post from "../components/Post.vue";
 import CreatePost from "../components/CreatePost.vue";
 import { isNavOpened } from "../store/NavStore";
@@ -39,29 +39,8 @@ const filters = ["Recents", "Friends", "Popular"];
 
 // auth0
 
-import { useAuth0 } from "@auth0/auth0-vue";
-const auth0 = useAuth0();
-
 // convex
-import { useConvexMutation, useConvexQuery } from "@convex-vue/core";
+import { useConvexQuery } from "@convex-vue/core";
 import { api } from "../../convex/_generated/api";
-import { user } from "../store/user.store";
 const posts = useConvexQuery(api.posts.get, {});
-
-const { mutate } = useConvexMutation(api.users.addUser);
-onMounted(() => {
-  mutate({
-    user: {
-      name: auth0.user.value!.name!,
-      email: auth0.user.value!.email!,
-      picture: auth0.user.value?.picture,
-    }
-  }).then((id) => {
-    user._id = id!;
-    user.name = auth0.user.value!.name!;
-    user.email = auth0.user.value!.email!;
-    user.picture = auth0.user.value!.picture;
-  })
-});
-
 </script>

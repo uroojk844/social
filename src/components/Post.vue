@@ -13,13 +13,13 @@
         </div>
       </div>
 
-      <section class="ml-auto relative">
+      <section v-if="post.userID === user._id" class="ml-auto relative">
         <div @click="menuToggle = !menuToggle" :name="$props.post._id"
           class="cursor-pointer border border-gray-400 size-8 centered rounded-full">
           <Icon icon="bi:three-dots-vertical" />
         </div>
 
-        <div v-if="post.userID === user._id " :class="{ hidden: !menuToggle }"
+        <div :class="{ hidden: !menuToggle }"
           class="menu absolute min-w-32 shadow rounded-xl overflow-hidden -left-4 -translate-x-full top-0 bg-white border">
           <div v-for="(option, index) in [
             {

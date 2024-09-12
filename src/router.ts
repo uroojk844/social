@@ -12,9 +12,9 @@ export const routes = <RouteRecordRaw[]>[
     component: () => import("./pages/Messages.vue"),
   },
   {
-    path: "/forums",
-    name: "Forums",
-    component: () => import("./pages/Forum.vue"),
+    path: "/profile/:id",
+    name: "Profile",
+    component: () => import("./pages/Profile.vue"),
   },
   {
     path: "/friends",
@@ -34,7 +34,7 @@ export const routes = <RouteRecordRaw[]>[
   {
     path: "/auth",
     name: "auth",
-    component: () => import("./pages/Auth.vue")
+    component: () => import("./pages/Auth.vue"),
   },
 ];
 

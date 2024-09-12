@@ -1,1 +1,0 @@
-<template>Forum</template>
