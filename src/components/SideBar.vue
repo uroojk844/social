@@ -1,5 +1,5 @@
 <template>
-  <nav :class="{ opened: isNavOpened }" class="h-dvh min-w-80 p-8 flex flex-col gap-8 transition-all duration-200 z-10">
+  <nav :class="{ opened: isNavOpened }">
     <section class="grid justify-items-center">
       <img class="size-16 rounded-full" :src="user?.picture" />
       <div class="font-[600]">{{ user.name }}</div>
@@ -24,7 +24,7 @@
       Logout
     </button>
     <div @click="isNavOpened = false"
-      class="md:hidden size-10 bg-white border border-gray-300 cursor-pointer grid place-items-center rounded-full fixed top-1/2 -translate-y-1/2 left-64 opacity-0 transition-all duration-200 delay-200 hover:bg-black hover:text-white"
+      class="lg:hidden size-10 bg-white border border-gray-300 cursor-pointer grid place-items-center rounded-full fixed top-1/2 -translate-y-1/2 left-64 opacity-0 transition-all duration-200 delay-200 hover:bg-black hover:text-white"
       :class="{ 'translate-x-[72px] opacity-100': isNavOpened }">
       <Icon icon="humbleicons:times" class="text-xl" />
     </div>
@@ -92,14 +92,14 @@ const routes = computed(() => [
   @apply bg-black text-white;
 }
 
-@media screen and (width<=768px) {
-  nav {
-    @apply -translate-x-full bg-white absolute left-0;
-  }
+nav {
+  @apply max-lg:absolute left-0 -translate-x-full lg:translate-x-0 bg-white h-dvh min-w-80 p-8 flex flex-col gap-8 transition-all duration-200 z-10;
+}
 
+@media not all and (min-width: 1024px) {
   nav.opened {
     @apply translate-x-0;
     box-shadow: 4px 0 16px 4px rgba(0, 0, 0, 0.2);
-  }
+  } 
 }
 </style>

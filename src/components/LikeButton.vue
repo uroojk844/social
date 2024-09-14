@@ -14,7 +14,7 @@ const { mutate } = useConvexMutation(api.posts.likePost);
 
 const props = defineProps<{
   id: Id<"posts">;
-  isLiked: boolean | null;
+  isLiked: boolean | undefined ;
   label: number;
 }>();
 

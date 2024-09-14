@@ -14,7 +14,7 @@ const auth0 = useAuth0();
     <Icon icon="svg-spinners:bars-rotate-fade" class="text-3xl" />
   </section>
   <!-- Main app -->
-  <section v-else-if="auth0.isAuthenticated.value" class="grid h-screen grid-cols-[max-content_auto_max-content]">
+  <section v-else-if="auth0.isAuthenticated.value">
     <SideBar />
     <main class="grid gap-4 content-start px-4 md:px-8 overflow-auto scrollbar">
       <RouterView />
@@ -31,15 +31,7 @@ const auth0 = useAuth0();
 </template>
 
 <style scoped>
-@media screen and (600px <=width <=768px) {
-  section {
-    @apply grid-cols-[auto_max-content];
-  }
-}
-
-@media screen and (width < 600px) {
-  section {
-    @apply grid-cols-[1fr];
-  }
+section {
+  @apply grid h-screen grid-cols-[1fr] sm:grid-cols-[auto_max-content] lg:grid-cols-[max-content_auto_max-content];
 }
 </style>

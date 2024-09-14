@@ -31,7 +31,7 @@ export const createPost = mutation({
     type: v.string(),
     data: v.object({
       text: v.optional(v.string()),
-      images: v.optional(v.string()),
+      images: v.optional(v.array(v.string())),
       video: v.optional(v.string()),
     }),
   },

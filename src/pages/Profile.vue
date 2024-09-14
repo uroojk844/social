@@ -8,7 +8,10 @@ import { useConvexQuery } from '@convex-vue/core';
 import { api } from '../../convex/_generated/api';
 import { useRoute } from 'vue-router';
 import { Id } from '../../convex/_generated/dataModel';
-import { Icon } from '@iconify/vue/dist/iconify.js';
+import Counts from '../components/Profile/Counts.vue';
+import Row from '../components/Row.vue';
+import FilterIndicator from '../components/Profile/FilterIndicator.vue';
+import Loader from '../components/Loader.vue';
 
 const defaultPostFilter = ref("text")
 const postFilter = ['text', 'images', 'videos'];
@@ -34,50 +37,39 @@ const filteredPost = computed(() => userPosts.data.value.filter(post => {
     <main class="grid gap-2">
         <NavBar title="Profile" />
 
-        <section class="flex gap-8 max-w-xl w-full mx-auto">
+        <Row :centered="true" :columnCount="2" class="sm:gap-8 w-[min(36rem,100%)] grid-cols-[max-content_1fr]">
             <img class="size-24 rounded-full" src="http://picsum.photos/300.webp" alt="profile_pic">
 
-            <div class="grid grid-cols-3 flex-1 items-center justify-between">
-                <div class="text-center">
-                    <div class="text-2xl font-medium">23</div>
-                    <div class="text-xs">Posts</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-2xl font-medium">23</div>
-                    <div class="text-xs">Followers</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-2xl font-medium">23</div>
-                    <div class="text-xs">Following</div>
-                </div>
-            </div>
-        </section>
+            <Row>
+                <Counts :counts="userPosts.data.value?.length" label="Posts" />
+                <Counts :counts="23" label="Followers" />
+                <Counts :counts="23" label="Following" />
+            </Row>
+
+        </Row>
 
         <div>
             <div class="font-semibold">{{ user.name }}</div>
             <div class="text-sm">@{{ user.username }}uroojk844</div>
         </div>
 
-        <div class="grid grid-cols-2 gap-2 justify-between items-center my-2">
+        <Row class="my-2" :columnCount="2">
             <IconButton icon="solar:camera-add-bold" label="upload picture"
-                class="justify-center text-black/80 border py-1.5 px-4 rounded-lg max-sm:px-2 max-sm:text-xs" />
+                class="justify-center border py-1.5 px-4 rounded-lg max-sm:px-2 max-sm:text-xs" />
             <IconButton icon="solar:pen-2-bold" label="Edit profile"
-                class="justify-center text-black/80 border py-1.5 px-4 rounded-lg max-sm:px-2 max-sm:text-xs" />
-        </div>
+                class="justify-center border py-1.5 px-4 rounded-lg max-sm:px-2 max-sm:text-xs" />
+        </Row>
 
         <!-- All user post -->
         <div class="flex items-center gap-4 mb-2">
             <div class="text-lg font-medium mr-auto">All posts</div>
 
-            <div class="cursor-pointer text-gray-500 capitalize"
-                :class="{ 'text-black/100 font-medium': defaultPostFilter == item }" @click="defaultPostFilter = item"
-                v-for="(item, index) in postFilter" :key="index">{{ item }}
-            </div>
+            <FilterIndicator v-for="(item, index) in postFilter" :key="index" :item="item" :defaultPostFilter
+                @click="defaultPostFilter = item" />
         </div>
 
-        <div v-if="userPosts.isLoading.value" class="flex justify-center py-8">
-            <Icon icon="svg-spinners:bars-rotate-fade" class="text-3xl" />
-        </div>
+        <Loader v-if="userPosts.isLoading.value" />
+
         <Post v-else v-for="(post, index) in filteredPost" :key="index" :post="post" />
     </main>
 </template>
