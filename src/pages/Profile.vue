@@ -40,7 +40,7 @@ const filteredPost = computed(() => userPosts.data.value.filter(post => {
         <Row :centered="true" class="sm:gap-8 w-[min(36rem,100%)] grid-cols-[max-content_1fr]">
             <img class="size-24 rounded-full" src="http://picsum.photos/300.webp" alt="profile_pic">
 
-            <Row>
+            <Row class="grid-cols-3">
                 <Counts :counts="userPosts.data.value?.length" label="Posts" />
                 <Counts :counts="23" label="Followers" />
                 <Counts :counts="23" label="Following" />
@@ -53,7 +53,7 @@ const filteredPost = computed(() => userPosts.data.value.filter(post => {
             <div class="text-sm">@{{ user.username }}uroojk844</div>
         </div>
 
-        <Row class="my-2 grid-cols-2">
+        <Row class="my-2">
             <IconButton icon="solar:camera-add-bold" label="upload picture"
                 class="justify-center border py-1.5 px-4 rounded-lg max-sm:px-2 max-sm:text-xs" />
             <IconButton icon="solar:pen-2-bold" label="Edit profile"

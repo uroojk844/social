@@ -1,5 +1,5 @@
 <template>
-    <div class="grid gap-2 grid-cols-3 items-center justify-between" :class="{
+    <div class="grid gap-2 grid-cols-2 items-center justify-between" :class="{
         'mx-auto': centered,
     }">
         <slot></slot>
