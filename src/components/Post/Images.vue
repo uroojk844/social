@@ -22,7 +22,7 @@ defineProps<{
 }>()
 
 function getImageUrl(storageId: string) {
-    const getImageUrl = new URL(`https://aromatic-tiger-521.convex.site/getImage`);
+    const getImageUrl = new URL(import.meta.env.DEV ? `https://aromatic-tiger-521.convex.site/getImage` : `https://beaming-possum-405.convex.site/getImage`);
     getImageUrl.searchParams.set("storageId", storageId);
     return getImageUrl.href;
 }
