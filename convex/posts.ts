@@ -72,3 +72,10 @@ export const editPost = mutation({
     return await ctx.db.patch(args.id, { data: { text: args.text } });
   },
 });
+
+export const generateUploadUrl = mutation({
+  args: {},
+  handler: async (ctx) => {
+    return ctx.storage.generateUploadUrl();
+  },
+});

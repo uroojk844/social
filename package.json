@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@auth0/auth0-vue": "^2.3.3",
+    "@cloudinary/url-gen": "^1.21.0",
+    "@cloudinary/vue": "^1.12.1",
     "@convex-vue/core": "^0.0.4",
     "@vueuse/core": "^11.0.3",
     "convex": "^1.15.0",

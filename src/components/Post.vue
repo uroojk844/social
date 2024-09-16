@@ -16,7 +16,7 @@
       <Actions :menuToggle :postID="post._id" :userID="post.userID" :textData="post.data.text" />
     </div>
 
-    <div v-if="post.type == 'text'" class="text-sm">{{ post.data?.text }}</div>
+    <div class="text-sm">{{ post.data?.text }}</div>
 
     <!-- Images -->
     <Images v-if="post.type == 'image'" :images="post.data.images" />

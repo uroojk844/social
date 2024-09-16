@@ -2,7 +2,7 @@
     <div v-if="images" class="post-container">
         <!-- image.length < 4 ? images : 3 -->
         <div v-for="(image, index) in images" :key="index">
-            <img :src="image" class="rounded-xl h-full object-cover w-full" />
+            <img :src="getImageUrl(image)" class="rounded-xl h-full object-cover w-full" />
         </div>
 
         <!-- rest image count component -->
@@ -20,9 +20,16 @@
 defineProps<{
     images: string[] | undefined,
 }>()
+
+function getImageUrl(storageId: string) {
+    const getImageUrl = new URL(`https://aromatic-tiger-521.convex.site/getImage`);
+    getImageUrl.searchParams.set("storageId", storageId);
+    return getImageUrl.href;
+}
+
 </script>
 
-<style >
+<style>
 .post-container {
     @apply grid grid-cols-2 gap-2;
 }
