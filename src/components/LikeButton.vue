@@ -1,5 +1,5 @@
 <template>
-  <IconButton :class="{ 'text-pink-400': isLiked }" icon="ph:heart-fill" :label="label || 0" @click="likePost" />
+  <IconButton :class="{ 'text-pink': isLiked }" icon="ph:heart-fill" :label="label || 0" @click="likePost" />
 </template>
 <script lang="ts" setup>
 import { useConvexMutation } from "@convex-vue/core";

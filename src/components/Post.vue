@@ -24,7 +24,7 @@
     <Videos v-if="post.type == 'video'" :videos="post.data.video" />
 
     <!-- Views, Likes,  -->
-    <Controls :userID="post.userID" :postID="post._id" :likes="post.likes" :views="post.views" />
+    <Controls :postID="post._id" :likes="post.likes" :views="post.views" />
   </section>
 </template>
 
