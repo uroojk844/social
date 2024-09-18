@@ -1,8 +1,7 @@
 <template>
     <div v-if="images" class="post-container">
-        <!-- image.length < 4 ? images : 3 -->
-        <div v-for="(image, index) in images" :key="index">
-            <img :src="getImageUrl(image)" class="rounded-xl h-full object-cover w-full" />
+        <div v-for="index in images.length <= 3 ? images.length : 3" :key="index">
+            <img :src="images[index - 1]" class="rounded-xl h-full object-cover w-full" />
         </div>
 
         <!-- rest image count component -->
@@ -20,12 +19,6 @@
 defineProps<{
     images: string[] | undefined,
 }>()
-
-function getImageUrl(storageId: string) {
-    const getImageUrl = new URL(import.meta.env.DEV ? `https://aromatic-tiger-521.convex.site/getImage` : `https://beaming-possum-405.convex.site/getImage`);
-    getImageUrl.searchParams.set("storageId", storageId);
-    return getImageUrl.href;
-}
 
 </script>
 

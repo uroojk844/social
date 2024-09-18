@@ -10,29 +10,35 @@
 
     </details>
 
-    <div v-if="filePreview" class="mb-2 relative">
-      <img v-if="postType == 'image'" :src="filePreview" alt="preview" class="w-full rounded-xl">
-      <video v-if="postType == 'video'" :src="filePreview" class="max-w-sm rounded-xl" controls></video>
-      <div @click="filePreview = ''"
+    <!-- Image Preview -->
+
+    <div v-if="previews.length" class="mb-2 relative post">
+      <Images v-if="postType == 'image'" :images="previews" />
+      <video v-if="postType == 'video'" :src="previews[0]" class="max-w-sm rounded-xl" controls></video>
+      <div @click="resetAll"
         class="absolute top-0 right-0 size-6 translate-x-3 -translate-y-3 rounded-full cursor-pointer bg-black text-white hover:text-red-500 grid place-items-center">
         <Icon icon="material-symbols:close" />
       </div>
     </div>
 
+    <!--End of Image Preview -->
+
+    <!-- Create Post buttons -->
     <section class="flex gap-3 items-center">
-      <label for="file">
+      <label for="image">
         <IconButton icon="solar:gallery-bold" label="Image" class="text-gray-950" icon-size="sm" />
-        <input @change="setImage" type="file" id="file" class="hidden">
+        <input @change="setFile($event, 'image')" type="file" accept="image/*,.heic" multiple id="image"
+          class="hidden" />
       </label>
 
-      <IconButton v-for="(item, index) in [
-        // { icon: 'material-symbols:location-on-rounded', label: 'Location' },
-        { icon: 'carbon:earth-filled', label: 'Public' },
-      ]" :key="index" :icon="item.icon" :label="item.label" class="text-gray-950" icon-size="sm" />
+      <label for="video">
+        <IconButton icon="solar:videocamera-add-outline" label="Video" class="text-gray-950" icon-size="sm" />
+        <input @change="setFile($event, 'video')" type="file" accept="video/*" id="video" class="hidden" />
+      </label>
 
-      <button :disabled="isLoading"
+      <button :disabled="isUploading"
         class="text-sm flex items-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed bg-black ml-auto text-white px-6 py-2 rounded-full cursor-pointer">
-        <span class="max-sm:hidden">{{ isLoading ? "Posting..." : "Send" }}</span>
+        <span class="max-sm:hidden">{{ isUploading ? "Posting..." : "Send" }}</span>
         <Icon icon="material-symbols:send-rounded" />
       </button>
     </section>
@@ -40,72 +46,66 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import IconButton from "./IconButton.vue";
 import { useConvexMutation } from "@convex-vue/core";
 import { api } from "../../convex/_generated/api";
 import { AlertStore } from "../store/AlertStore";
 import { user } from "../store/user.store";
 import { Icon } from "@iconify/vue/dist/iconify.js";
-import { PostType } from "../interfaces/post.interface";
+import { isUploading, postType, previews, resetAll, setFile, uploadFiles } from "../functions/uploadFiles";
+import Images from "./Post/Images.vue";
 
 const text = ref("");
+const { mutate } = useConvexMutation(api.posts.createPost);
 
-const files = ref<File | null>();
-const filePreview = ref("");
-
-const postType = ref<PostType>("text")
-
-const { mutate, isLoading } = useConvexMutation(api.posts.createPost);
-
-const generateUploadUrl = useConvexMutation(api.posts.generateUploadUrl);
 
 const images = ref<string[]>([]);
 const video = ref("");
 
 async function createPost() {
-  let data = {
-    text: text.value,
-    images: images.value,
-    video: video.value,
-  };
+  const data = computed(() => {
+    return {
+      text: text.value,
+      images: images.value,
+      video: video.value,
+    }
+  });
 
   if (user._id && postType.value == "text") {
-    mutate({ userID: user._id, type: postType.value, data: data }).then(() => AlertStore.type = "success").finally(() => text.value = "");
+    mutate({ userID: user._id, type: postType.value, data: data.value }).then(() => AlertStore.type = "success").finally(() => text.value = "");
   }
   else if (user._id && (postType.value == "image" || postType.value == "video")) {
-    const postUrl = await generateUploadUrl.mutate({});
-    await fetch(postUrl as string, {
-      method: "POST",
-      headers: { "Content-Type": 'multipart/form-data' },
-      body: files.value,
-    }).then(res => res.json()).then(res => {
-      if (postType.value == "image") {
-        images.value.push(res.storageId);
-      } else {
-        video.value = res.storageId;
-      }
-    });
-
-    mutate({ userID: user._id, type: postType.value, data: data })
+    if (postType.value == "image") {
+      images.value = await uploadFiles();
+    } else if (postType.value == "video") {
+      let files = await uploadFiles();
+      video.value = files[0];
+    }
+    mutate({ userID: user._id, type: postType.value, data: data.value })
       .then(() => AlertStore.type = "success")
-      .finally(() => { text.value = ""; filePreview.value = ""; postType.value = "text" });
+      .finally(() => {
+        text.value = "";
+        previews.value = [];
+        postType.value = "text";
+        isUploading.value = false;
+      });
   }
 }
-
-async function setImage(event: any) {
-  files.value = event.target.files[0];
-  postType.value = files.value?.type.includes("mp4") ? "video" : "image";
-  postType.value == "video" && alert("we are working on video uploading part!!");
-  if (files.value) {
-    const url = URL.createObjectURL(files.value);
-    filePreview.value = url;
-  }
-}
-
 </script>
 
 <style scoped>
+.post {
+  container-name: post;
+  container-type: inline-size;
+}
+
+@container post (width> 600px) {
+  .post-container {
+    @apply flex h-60;
+  }
+}
+
 details {
   transition: 500ms ease;
   @apply border h-12 overflow-hidden border-gray-300 mb-3 rounded-3xl bg-white;
