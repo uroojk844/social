@@ -40,6 +40,7 @@ export const createPost = mutation({
       userID: args.userID,
       type: args.type,
       data: args.data,
+      likes: [],
     });
   },
 });

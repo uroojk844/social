@@ -23,5 +23,4 @@ function likePost() {
     mutate({ id: props.id, userId: user._id })
   }
 }
-
 </script>

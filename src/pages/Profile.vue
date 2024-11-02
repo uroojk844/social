@@ -24,12 +24,11 @@ const filteredPost = computed(() => userPosts.data.value.filter(post => {
         case 'text':
             return post.data.text;
         case 'images':
-            return post.data.images;
+            return (post.data.images?.length && post.data.images);
         case 'videos':
             return post.data.video;
     }
-})
-);
+}));
 
 </script>
 
@@ -70,6 +69,6 @@ const filteredPost = computed(() => userPosts.data.value.filter(post => {
 
         <Loader v-if="userPosts.isLoading.value" />
 
-        <Post v-else v-for="(post, index) in filteredPost" :key="index" :post="post" />
+        <Post v-else v-for="post in filteredPost" :key="post._id" :post="post" />
     </main>
 </template>

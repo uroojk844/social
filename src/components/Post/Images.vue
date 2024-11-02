@@ -6,7 +6,7 @@
 
         <!-- rest image count component -->
         <div v-if="images.length > 3" class="more relative rounded-xl overflow-hidden font-bold text-5xl w-full">
-            <img src="http://picsum.photos/400/300.webp?4" class="rounded-xl h-full object-cover" />
+            <img :src="images[4]" class="rounded-xl h-full object-cover" />
 
             <div class="absolute cursor-pointer size-full top-0 centered backdrop-blur-sm text-white text-center">
                 +{{ images.length - 3 }}
@@ -24,7 +24,17 @@ defineProps<{
 
 <style>
 .post-container {
+    container-type: inline-size;
     @apply grid grid-cols-2 gap-2;
+    
+}
+
+
+@container (width < 600px) {
+    .post-container:not(:has(.more)) div:nth-child(3) {
+        grid-column: 1/span 2;
+        aspect-ratio: 2/1
+    }
 }
 
 .post-container div {
@@ -32,7 +42,8 @@ defineProps<{
     aspect-ratio: 4/3;
 }
 
-@media screen and (min-width: 600px) {
+
+@container (width > 600px) {
     .post-container div {
         @apply flex-1;
         transition: 0.25s ease;
